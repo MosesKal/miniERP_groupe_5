@@ -1,0 +1,15 @@
+.container-login {
+  display: flex;
+  width: 100%;
+}
+.login-illustration,
+.container-formulaire {
+  height: 100vh;
+  width: 50vw;
+}
+.login-illustration {
+  background-color: brown;
+}
+.container-formulaire {
+  background-color: blueviolet;
+}
