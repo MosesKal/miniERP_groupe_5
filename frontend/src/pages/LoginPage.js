@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, TextField } from "@mui/material/";
 
-const login_page = () => {
+import "../styles/login_page.css";
+
+const LoginPage = () => {
   return (
     <div className="container-login">
       <div className="login-illustration"></div>
@@ -10,4 +11,4 @@ const login_page = () => {
   );
 };
 
-export default login_page;
+export default LoginPage;
