@@ -1,9 +1,8 @@
-@import url(./formSingIn.css);
-
 .container-login {
   display: flex;
   width: 100%;
 }
+
 .login-illustration,
 .container-formulaire {
   height: 100vh;
@@ -12,6 +11,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .login-illustration {
   background: rgb(18, 38, 71);
   background: radial-gradient(
@@ -21,4 +21,41 @@
   );
 }
 .container-formulaire {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.block-form {
+  width: 60%;
+  height: 70%;
+  border: 1px solid black;
+}
+.form-titre {
+  text-align: center;
+}
+.form-titre h1 {
+  font-weight: 500;
+}
+.formulaire {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.formulaire form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-form {
+  width: 100%;
+}
+
+.div-input {
+  width: 80%;
+  margin-top: 20px;
+}
+
+.btn {
+  width: 100%;
+}
+
+/*--*/
