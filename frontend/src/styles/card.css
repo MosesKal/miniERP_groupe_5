@@ -1,0 +1,46 @@
+.project-card{
+    display: flex;
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    margin:auto;
+    border-radius: 15px 15px 15px;
+  }
+  .project-titre{
+    margin: 20px 10px;
+    font-size: larger;
+    color: rgba(79, 77, 77, 0.5);
+  }
+  .project-cota{
+    display: flex;
+    flex-direction: column;
+  }
+  .project-Nbre{
+    margin-left: 15px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .icon-cotation{
+    width: 34px;
+    height: 34px;
+    margin: 13px;
+    color: rgb(255, 255, 255);
+    
+    
+  }
+  .project-Icon{
+    margin: 40px 20px;
+    width: 52px;
+    height: 52px;
+    background-color: #ca1a37;
+    border-radius: 50%;
+  }
+  .project-State{
+    width: 80%;
+    height: 25px;
+    margin-top: 7px;
+    color: rgb(87, 92, 98);
+  }
+  .project-cot{
+    color: green;
+  }
