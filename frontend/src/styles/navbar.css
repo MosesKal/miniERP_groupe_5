@@ -38,6 +38,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
+    cursor: pointer;
   }
   
   .navbar-avatar img {
@@ -54,5 +55,6 @@
     height: 24px;
     margin-right: 70px;
     color: rgb(127, 131, 138);
+    cursor: pointer;
   }
   
