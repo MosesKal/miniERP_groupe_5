@@ -9,7 +9,7 @@
     transition: box-shadow 0.8s ease-in-out;
   }
   .project-seconcards:hover {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 2);
     cursor: pointer;
   }
   @keyframes fade-in {

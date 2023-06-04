@@ -9,7 +9,8 @@
     transition: box-shadow 0.8s ease-in-out;
   }
   .project-card:hover {
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 2);
+    animation: 0.3s ease-in-out;
     cursor: pointer;
   }
   @keyframes fade-in {

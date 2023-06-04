@@ -10,7 +10,7 @@ import "../styles/graph.css";
 
 function Graph(){
     return(
-      <div className="project-graph">
+      <div className="project-graph fade-in-animation">
         <div className="project-title">
             <p className="project-stat">Statistique des commandes validées </p>
             <BasicSelect/>

@@ -9,7 +9,7 @@ function Seconcard (){
     <div className="project-seconcards fade-in-animation">
           <div className="project-Icons" >
                     <div className="icons-cotation"><MonetizationOnIcon/></div> 
-                    <p className="project-States"><span className="project-cots"><ArrowUpwardIcon/>22%</span> cotation</p>
+                    <p className="project-States"><span className="project-cots"><ArrowUpwardIcon/></span> Detail</p>
           </div> 
           <div className="project-cotas">
                     <p className="project-Nbres">Kamoa Kopper</p>
