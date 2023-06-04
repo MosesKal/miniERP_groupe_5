@@ -1,15 +1,15 @@
-.project-card{
+.project-seconcards{
     display: flex;
     width: 350px;
-    height: 150px;
+    height: 200px;
     background-color: white;
     margin:auto;
-    border-radius: 15px 15px 15px;
+    border-radius: 0px 15px 0PX 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     transition: box-shadow 0.8s ease-in-out;
   }
-  .project-card:hover {
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  .project-seconcards:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
   }
   @keyframes fade-in {
@@ -25,21 +25,20 @@
     animation: fade-in 1.8s ease-in-out;
   }
 
-  .project-titre{
-    margin: 20px 10px;
+  .project-titres{
+    margin: 20px 0px ;
     font-size: larger;
     color: rgba(79, 77, 77, 0.5);
   }
-  .project-cota{
+  .project-cotas{
     display: flex;
     flex-direction: column;
   }
-  .project-Nbre{
-    margin-left: 15px;
-    font-size: 32px;
-    font-weight: bold;
+  .project-Nbres{
+    margin: 40px 20px 0px ;
+    font-size: 25px;
   }
-  .icon-cotation{
+  .icons-cotation{
     width: 34px;
     height: 34px;
     margin: 25px;
@@ -47,19 +46,19 @@
     
     
   }
-  .project-Icon{
+  .project-Icons{
     margin: 40px 20px;
     width: 72px;
     height: 72px;
-    background-color: #ca1a37;
+    background-color: #0c45c0;
     border-radius: 50%;
   }
-  .project-State{
+  .project-States{
     width: 80%;
     height: 25px;
     margin-top: 7px;
     color: rgb(87, 92, 98);
   }
-  .project-cot{
+  .project-cots{
     color: green;
   }

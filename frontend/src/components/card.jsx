@@ -5,7 +5,7 @@ import '../styles/card.css';
 
 function Card (){
     return(
-        <div className="project-card">
+        <div className="project-card fade-in-animation">
             <div className="project-cota">
                  <p className="project-titre">Demande des Cotations</p>
                  <h2 className="project-Nbre">$15k</h2>

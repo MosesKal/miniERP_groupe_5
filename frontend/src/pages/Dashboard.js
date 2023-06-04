@@ -1,27 +1,34 @@
-import Header from "../Composants/Navbar"
-import Bar from "../Composants/BarRech"
-import Recta1 from "../Composants/recta1"
-import Recta2 from "../Composants/recta2"
-import Recta3 from "../Composants/recta3"
+import React from "react";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar";
+import Card  from "../components/card";
+import Seconcard from "../components/seconcard.jsx";
+import "../styles/dashboard.css"
 
-function Dashbord(){
+function Dashboard(){
     return(
-        <div className="tout1">
+   
+        <div className="project-headings">
+            <Sidebar/>
+            <Navbar/>
+           <div className="project-heading">
+                <div className="project-cards">
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                </div>
+                <div className="project-seconcard">
+                    <Seconcard/>
+                    <Seconcard/>
+                    <Seconcard/>
+                    <Seconcard/>
+                </div>
+            </div>
             
-            <div className="bordu">
-                <Header/>
-                <Bar/>
-            </div>
-            <div className="contToutrecta">
-                <Recta1/>
-                <Recta2/>
-                <Recta3/>
-                <h3 className="titreFar">Démande des Cotations recentes </h3>
-                <div className="ligneFar"></div>
-
-            </div>
-
             
         </div>
+
     )
-}export default Dashbord
+} 
+export default Dashboard;

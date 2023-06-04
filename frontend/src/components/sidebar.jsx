@@ -26,7 +26,7 @@ function Sidebar() {
           <li className="project-item"><PeopleIcon/> <span className='item'>Client</span></li>
         </ul>
         <div className="project-setting">
-          <SettingsIcon/> <span className='item'>Settings</span>
+          <SettingsIcon/> <span className='item'>Parametre</span>
         </div>
          
       </div>
