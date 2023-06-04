@@ -1,0 +1,19 @@
+.project-graph{
+    width: 50%;
+    height: 350px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 18px;
+    
+}
+.project-title{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 50px;
+    margin: 0px 20px 0px;
+    border-bottom: 1px solid rgb(187, 184, 184);
+}
+.project-stat{
+    color: rgb(129, 131, 132);
+    padding-top: 20px;
+}
