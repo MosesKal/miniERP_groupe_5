@@ -43,16 +43,14 @@
   .icon-cotation{
     width: 34px;
     height: 34px;
-    margin: 25px;
-    color: rgb(255, 255, 255);
-    
+    margin: 15px;
     
   }
   .project-Icon{
     margin: 40px 20px;
     width: 72px;
     height: 72px;
-    background-color: #ca1a37;
+    background-color: #ffffff;
     border-radius: 50%;
   }
   .project-State{

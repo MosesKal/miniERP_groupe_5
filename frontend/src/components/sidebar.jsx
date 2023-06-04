@@ -20,8 +20,9 @@ function Sidebar() {
         <ul className="project-menu">
           <li className="project-item"><AutoAwesomeMosaicIcon /><span className='item'>Dashboard</span></li>
           <li className='project-item'><BallotIcon/><span className='item'>Cotation</span></li>
-          <li className="project-item"><ListAltIcon/><span className='item'>Gestion de commande</span></li>
-          <li className="project-item"><CloudQueueIcon/><span className='item'>Gestion de stock</span></li>
+          <li className='project-item'><BallotIcon/><span className='item'>Offres</span></li>
+          <li className="project-item"><ListAltIcon/><span className='item'>Commande</span></li>
+          <li className="project-item"><CloudQueueIcon/><span className='item'>Stock</span></li>
           <li className="project-item"><AccountBalanceIcon/><span className='item'>Comptabilite</span> </li>
           <li className="project-item"><PeopleIcon/> <span className='item'>Client</span></li>
         </ul>

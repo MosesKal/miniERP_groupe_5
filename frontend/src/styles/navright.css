@@ -1,9 +1,7 @@
-.project-navbar{
-    display: flex;
-    justify-content: space-between;
+.project-navright{
     align-items: center;
     padding: 10px;
-    width: 85%;
+    width: 10%;
     height: 80px;
     margin-left: auto;
     margin-right: 10px;
@@ -11,44 +9,28 @@
 }
 
   
-  .navbar-search {
-    display: flex;
-    margin-left: 20px;
-    color: rgb(127, 131, 138);
-    cursor: pointer;
-  }
-  
-  .navbar-search input{
-    padding-top: 0px;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    background-color:  rgb(233, 233, 240);
-    
-  }
-  
-  .navbar-right {
+  .navright-right {
     display: flex;
     align-items: center;
     gap: 15px;
   }
   
-  .navbar-avatar {
-    width: 32px;
-    height: 32px;
+  .navright-avatar {
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
     cursor: pointer;
   }
   
-  .navbar-avatar img {
+  .navright-avatar img {
     width: 100%;
     height: 100%; 
     object-fit: cover;
   }
   
-  .navbar-icons {
+  .navright-icons {
     display: flex;
     gap: 20px;
     position: relative;

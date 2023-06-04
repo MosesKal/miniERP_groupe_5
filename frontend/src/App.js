@@ -1,7 +1,8 @@
 import React from "react";
 // import LoginPage from "./pages/LoginPage";
 // import Miningpages from "./pages/Miningpages.js"
-import Dashboard  from "./pages/Dashboard";
+// import Dashboard  from "./pages/Dashboard";
+import Stock from "./pages/Stocks.js";
 import "./styles/App.css";
 
 
@@ -10,8 +11,8 @@ function App() {
     <div className="app">
       {/* <LoginPage/> */}
       {/* <Miningpages/> */}
-      <Dashboard/>
-
+      {/* <Dashboard/> */}
+      <Stock/>
     </div>
   );
 }
