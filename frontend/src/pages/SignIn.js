@@ -3,10 +3,10 @@ import "../styles/login_page.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
 // import { TextField, Button, Divider, Chip, Typography } from "@mui/material";
+import Illutration from "./../composant/Illustration";
 
 const SignIn = () => {
   const [showPassword, setshowPassword] = useState(false)
-
   function handleupdate() {
     setshowPassword(!false)
   }
@@ -14,11 +14,7 @@ const SignIn = () => {
 
   return (
     <div className="container-login">
-      <div className="login-illustration">
-        <div className="illustration-background">
-
-        </div>
-      </div>
+      <Illutration/>
       <div className="container-formulaire">
         <div className="block-form">
           <div className="form-titre">

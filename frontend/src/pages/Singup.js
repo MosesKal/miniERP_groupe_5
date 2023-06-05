@@ -2,12 +2,17 @@ import React from "react";
 import "../styles/login_page.css";
 // import IconButton from '@material-ui/core/IconButton';
 // import InputAdornment from '@material-ui/core/InputAdornment';
-import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography, Visibility, VisibilityOff } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
+import Illutration from "./../composant/Illustration";
+
+
 
 const Singup = () => {
+
   return (
     <div className="container-login">
-      <div className="login-illustration"></div>
+      <Illutration/>
       <div className="container-formulaire">
         <div className="block-form">
           <div className="form-titre">
@@ -32,6 +37,7 @@ const Singup = () => {
                   variant="outlined"
                   size="normal"
                   className="input-form"
+                  
                 />
               </div>
 
