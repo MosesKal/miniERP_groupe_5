@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/login_page.css";
-import { TextField, Button, Divider, Chip, Typography } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
+// import { TextField, Button, Divider, Chip, Typography } from "@mui/material";
 
 const SignIn = () => {
+  const [showPassword, setshowPassword] = useState(false)
+
+  function handleupdate() {
+    setshowPassword(!false)
+  }
+
+
   return (
     <div className="container-login">
-      <div className="login-illustration"></div>
+      <div className="login-illustration">
+        <div className="illustration-background">
+
+        </div>
+      </div>
       <div className="container-formulaire">
         <div className="block-form">
           <div className="form-titre">
@@ -30,6 +43,19 @@ const SignIn = () => {
                   variant="outlined"
                   size="normal"
                   className="input-form"
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleupdate}
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>,
+                  }}
                 />
               </div>
 
@@ -46,7 +72,7 @@ const SignIn = () => {
 
                 <div className=" btn btn2">
                   <Button variant="outlined" fullWidth size="large">
-                    Créer un compt
+                    Créer un compte
                   </Button>
                 </div>
               </div>

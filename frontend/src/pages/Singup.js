@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/login_page.css";
-import { TextField, Button, Divider, Chip, Typography } from "@mui/material";
+// import IconButton from '@material-ui/core/IconButton';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography, Visibility, VisibilityOff } from "@mui/material";
 
 const Singup = () => {
   return (
@@ -36,10 +38,11 @@ const Singup = () => {
               <div className="div-input input2">
                 <TextField
                   id="outlined-basic"
-                  label="Entrez le mot de passe"
+                  label="Entrez le mots de passe"
                   variant="outlined"
                   size="normal"
                   className="input-form"
+                  
                 />
               </div>
 

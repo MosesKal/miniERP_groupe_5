@@ -13,39 +13,55 @@
 }
 
 .login-illustration {
+  padding-left: 99px;
+  padding-top: 90px;
   background: rgb(18, 38, 71);
-  background: radial-gradient(
-    circle,
-    rgba(18, 38, 71, 1) 0%,
-    rgba(9, 14, 35, 1) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(18, 38, 71, 1) 0%,
+      rgba(9, 14, 35, 1) 100%);
 }
+
+.illustration-background {
+  background-image: url('./../pngwing.com.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 50%; 
+
+}
+
 .container-formulaire {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .block-form {
   width: 60%;
   height: 50%;
-  
+
 }
+
 .form-titre {
   width: 100%;
   padding-left: 50px;
 }
+
 .form-titre h1 {
   font-weight: 500;
 }
+
 .formulaire {
   padding-top: 20px;
   padding-bottom: 50px;
 }
+
 .formulaire form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .input-form {
   width: 100%;
 }
@@ -55,18 +71,20 @@
   margin-bottom: 30px;
 }
 
-.input1 {
-}
+.input1 {}
 
 .btn {
   width: 100%;
 }
+
 .btn1 {
   margin-bottom: 20px;
 }
+
 .btn2 {
   margin-top: 20px;
 }
+
 .block-divider {
   width: 80%;
 }
