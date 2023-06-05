@@ -9,7 +9,7 @@ const Singup = () => {
       <div className="container-formulaire">
         <div className="block-form">
           <div className="form-titre">
-            <Typography variant="h4">Création du compte</Typography>
+            <Typography variant="h4" >Création du compte</Typography>
           </div>
           <div className="formulaire">
             <form action="">
