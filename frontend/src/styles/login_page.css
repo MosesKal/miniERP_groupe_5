@@ -31,13 +31,14 @@
   border: 1px solid black;
 }
 .form-titre {
-  text-align: center;
+  width: 100%;
+  padding-left: 50px;
 }
 .form-titre h1 {
   font-weight: 500;
 }
 .formulaire {
-  padding-top: 50px;
+  padding-top: 20px;
   padding-bottom: 50px;
 }
 .formulaire form {
@@ -51,11 +52,23 @@
 
 .div-input {
   width: 80%;
-  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.input1 {
 }
 
 .btn {
   width: 100%;
+}
+.btn1 {
+  margin-bottom: 20px;
+}
+.btn2 {
+  margin-top: 20px;
+}
+.block-divider {
+  width: 80%;
 }
 
 /*--*/
