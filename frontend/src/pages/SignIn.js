@@ -7,14 +7,14 @@ import Illutration from "./../composant/Illustration";
 
 const SignIn = () => {
   const [showPassword, setshowPassword] = useState(false)
-  function handleupdate() {
-    setshowPassword(!false)
-  }
 
+  function handleupdate() {
+    setshowPassword(!showPassword)
+  }
 
   return (
     <div className="container-login">
-      <Illutration/>
+      <Illutration />
       <div className="container-formulaire">
         <div className="block-form">
           <div className="form-titre">
@@ -37,14 +37,14 @@ const SignIn = () => {
                   id="outlined-basic"
                   label="mot de pass"
                   variant="outlined"
+                  type={showPassword ? 'text' : 'password'}
                   size="normal"
                   className="input-form"
                   InputProps={{
                     endAdornment: <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleupdate}
-                        // onClick={handleClickShowPassword}
+                        onClick={() => handleupdate()}
                         // onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
