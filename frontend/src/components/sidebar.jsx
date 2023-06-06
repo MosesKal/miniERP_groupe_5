@@ -47,7 +47,7 @@ function Sidebar() {
                     </li>
                                           
                     <li className="project-item">
-                          <PeopleIcon/> <NavLink to="/Client" className='item'>Client</NavLink>
+                          <PeopleIcon/> <NavLink to="/Client" className='ab item'>Client</NavLink>
                     </li>
 
             </ul>
