@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import AutoAwesomeMosaicIcon from '@mui/icons-material/AutoAwesomeMosaic';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -11,24 +12,49 @@ import '../styles/sidebar.css';
 function Sidebar() {
     return (
       <div className="project-sidebar">
-        <div className='project-side'>
-           <img className='project-logo' src="logo.jpg" alt="" />
-           <div className='project-users'>
-            <p>MINING</p>
-           </div>
-        </div>
-        <ul className="project-menu">
-          <li className="project-item"><AutoAwesomeMosaicIcon /><span className='item'>Dashboard</span></li>
-          <li className='project-item'><BallotIcon/><span className='item'>Cotation</span></li>
-          <li className='project-item'><BallotIcon/><span className='item'>Offres</span></li>
-          <li className="project-item"><ListAltIcon/><span className='item'>Commande</span></li>
-          <li className="project-item"><CloudQueueIcon/><span className='item'>Stock</span></li>
-          <li className="project-item"><AccountBalanceIcon/><span className='item'>Comptabilite</span> </li>
-          <li className="project-item"><PeopleIcon/> <span className='item'>Client</span></li>
-        </ul>
-        <div className="project-setting">
-          <SettingsIcon/> <span className='item'>Parametre</span>
-        </div>
+         <div className='project-side'>
+             <img className='project-logo' src="logo.jpg" alt="" />
+                 <div className='project-users'>
+                     <p>MINING</p>
+                 </div>
+         </div>
+
+            <ul className="project-menu">
+
+                    <li className="project-item">
+                        <AutoAwesomeMosaicIcon />
+                        <NavLink to="/" className='item'>Dashboard</NavLink>
+                    </li>
+
+                    <li className='project-item'>
+                          <BallotIcon/><NavLink to="/Cotation" className='item'>Cotation</NavLink>
+                    </li>
+
+                    <li className='project-item'>
+                          <BallotIcon/><NavLink to="/Offres" className='item'>Offres</NavLink>
+                    </li>
+
+                    <li className="project-item">
+                          <ListAltIcon/><NavLink to="/Commande" className='item'>Commande</NavLink>
+                    </li>
+                                
+                    <li className="project-item">
+                          <CloudQueueIcon/><NavLink to="/Stock" className='item'>Stock</NavLink>
+                    </li>
+                                      
+                    <li className="project-item">
+                          <AccountBalanceIcon/><NavLink to="/Comptabilite" className='item'>Comptabilite</NavLink>
+                    </li>
+                                          
+                    <li className="project-item">
+                          <PeopleIcon/> <NavLink to="/Client" className='item'>Client</NavLink>
+                    </li>
+
+            </ul>
+
+            <div className="project-setting">
+                <SettingsIcon/> <NavLink to="/Parametre" className='item'>Parametre</NavLink>
+            </div>
          
       </div>
     );

@@ -4,13 +4,13 @@ import Navbar from "../components/navbar";
 import "../styles/stock.css"
 
 
-function Comptabilite (){
+function Commande (){
     return(
       <div className="">
          <Sidebar/>
          <Navbar/>
             <div className="project-stock">
-                <h1>Comptabilite</h1>
+                <h1>Commande</h1>
 
                     <div className="">
 
@@ -21,4 +21,4 @@ function Comptabilite (){
       </div>
     )
 }
-export default Comptabilite;
+export default Commande;

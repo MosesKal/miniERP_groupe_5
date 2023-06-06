@@ -1,17 +1,24 @@
 import React from "react";
-import Sidebar from "../components/sidebar.jsx";
-import Navbar from "../components/navbar.jsx";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar";
+import "../styles/stock.css"
+
 
 function Cotation (){
     return(
-        <div className="">
-            
-        <div className="">
-            <Sidebar/>
-            <Navbar/>
-        </div>
+      <div className="">
+         <Sidebar/>
+         <Navbar/>
+            <div className="project-stock">
+                <h1>Cotation</h1>
 
-    </div>
+                    <div className="">
+
+                    </div>
+           
+            </div>
+
+      </div>
     )
-} 
+}
 export default Cotation;

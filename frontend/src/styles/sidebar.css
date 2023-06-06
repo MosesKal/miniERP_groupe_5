@@ -5,13 +5,12 @@
     top: 0;
     bottom: 0;
     left: 0;
-    box-shadow: 5px 0px 5px rgb(164, 163, 163);
   }
   .project-side{
     width: 90%;
     height: 15vh;
     padding-top: 10px;
-    border-bottom: solid 1px rgb(147, 139, 139);
+    border-bottom: solid 1px rgb(237, 239, 240);
   }
   .project-logo{
     width: 70px;
@@ -24,9 +23,8 @@
     margin: 20px 30px ;
     color: #c9cad2;
     text-align: center;padding-top: 30px;
-    border: 1px solid rgb(220, 217, 217);
+    border: 1px solid rgb(237, 234, 234);
     border-radius: 10px;
-    box-shadow: 2px 1px 2px rgb(146, 146, 146);
   }
   
   .project-menu {
@@ -37,38 +35,39 @@
   
   .project-item, .project-setting {
     width: 100%;
-    height: 30px;
+    height: 50px;
     display: flex;
-    color: rgb(66, 69, 72);
-    font-weight: bold;
-    margin-top: 50px;
+    color: rgb(107, 110, 113);
+    margin-top: 0px;
     padding: 10px 20px 0px;
     text-decoration: none;
   }
   .project-item:hover {
     width: 100%;
-    height: 45px;
-    background-color: rgb(196, 198, 203);
+    height: 50px;
+    background-color:  rgb(235, 235, 243);
     color: #007bff;
     cursor: pointer;
+    border-left: #007bff solid 6px;
   }
   .item{
     width: 90%;
     height: 20px;
     margin: 5px 10px 0px;
-    padding: top 1px; 
+    text-decoration: none;
+    color: rgb(107, 110, 113);
   }
   .project-setting{
     width: 90%;
     height: 5vh;
     color: rgb(57, 59, 60);
     padding-left: 20px;
-    margin-top: 10vh;
+    margin-top: 15vh;
   }
   .project-setting:hover {
     width: 100%;
-    height: 45px;
-    background-color: rgb(196, 198, 203);
+    height: 50px;
+    background-color: rgb(235, 235, 243);
     color: #007bff;
     cursor: pointer;
   }

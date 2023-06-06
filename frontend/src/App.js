@@ -1,20 +1,30 @@
-import React from "react";
-// import LoginPage from "./pages/LoginPage";
-// import Miningpages from "./pages/Miningpages.js"
-// import Dashboard  from "./pages/Dashboard";
-import Stock from "./pages/Stocks.js";
-import "./styles/App.css";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Stock from "./pages/Stock";
+import Cotation from "./pages/Cotation";
+import Offres from "./pages/Offres.js";
+import Client from "./pages/Client";
+import Comptabilite from "./pages/Comptabilite";
+import Commande from "./pages/Commande";
+import Parametre from "./pages/Parametre";
+import './styles/App.css';
 
-
-function App() {
-  return (
+function App (){
+  return(
     <div className="app">
-      {/* <LoginPage/> */}
-      {/* <Miningpages/> */}
-      {/* <Dashboard/> */}
-      <Stock/>
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<Dashboard/>}></Route>
+              <Route path="/Cotation" element={<Cotation/>}></Route>
+              <Route path="/Offres" element={<Offres/>}></Route>
+              <Route path="/Commande" element={<Commande/>}></Route>
+              <Route path="/Stock" element={<Stock/>}></Route>
+              <Route path="/Comptabilite" element={<Comptabilite/>}></Route>
+              <Route path="/Client" element={<Client/>}></Route>
+              <Route path="/Parametre" element={<Parametre/>}></Route>
+          </Routes>
+      </BrowserRouter>
     </div>
-  );
-}
 
-export default App;
+  )
+}export default App;
