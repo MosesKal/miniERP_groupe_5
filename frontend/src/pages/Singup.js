@@ -1,15 +1,18 @@
 import React from "react";
+import React, { useState } from "react";
 import "../styles/login_page.css";
-// import IconButton from '@material-ui/core/IconButton';
-// import InputAdornment from '@material-ui/core/InputAdornment';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
 import Illutration from "../components/Illustration";
-
+// import IconButton from '@material-ui/core/IconButton';
+// import InputAdornment from '@material-ui/core/InputAdornment';
 
 
 const Singup = () => {
-
+  const [showPassword, setshowPassword] = useState(false)
+  function handleupdate() {
+    setshowPassword(!showPassword)
+  }
   return (
     <div className="container-login">
       <Illutration/>
@@ -46,9 +49,20 @@ const Singup = () => {
                   id="outlined-basic"
                   label="Entrez le mots de passe"
                   variant="outlined"
+                  type={showPassword ? 'text' : 'password'}
                   size="normal"
                   className="input-form"
-                  
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleupdate()}
+                        edge="end"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>,
+                  }}
                 />
               </div>
 
