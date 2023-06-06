@@ -34,7 +34,7 @@
   }
   
   .project-item, .project-setting {
-    width: 100%;
+    width: 90%;
     height: 50px;
     display: flex;
     color: rgb(107, 110, 113);

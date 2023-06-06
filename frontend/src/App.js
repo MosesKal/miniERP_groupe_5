@@ -10,6 +10,7 @@ import Client from "./pages/Client";
 import Comptabilite from "./pages/Comptabilite";
 import Commande from "./pages/Commande";
 import Parametre from "./pages/Parametre";
+import Miningpages from "./pages/Miningpages";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/Comptabilite" element={<Comptabilite/>}></Route>
               <Route path="/Client" element={<Client/>}></Route>
               <Route path="/Parametre" element={<Parametre/>}></Route>
+              <Route path="/Miningpages" element={<Miningpages/>}></Route>
           </Routes>
       </BrowserRouter>
     </div>
