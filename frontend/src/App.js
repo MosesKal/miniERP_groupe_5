@@ -26,6 +26,9 @@ function App() {
               <Route path="/Client" element={<Client/>}></Route>
               <Route path="/Parametre" element={<Parametre/>}></Route>
               <Route path="/Miningpages" element={<Miningpages/>}></Route>
+              <Route path="/SingIn" element={<SingIn/>}></Route>
+              <Route path="/Singup" element={<Singup/>}></Route>
+
           </Routes>
       </BrowserRouter>
     </div>
