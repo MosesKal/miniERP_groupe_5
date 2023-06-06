@@ -3,7 +3,7 @@ import "../styles/login_page.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
 // import { TextField, Button, Divider, Chip, Typography } from "@mui/material";
-import Illutration from "./../composant/Illustration";
+import Illutration from "../components/Illustration";
 
 const SignIn = () => {
   const [showPassword, setshowPassword] = useState(false)

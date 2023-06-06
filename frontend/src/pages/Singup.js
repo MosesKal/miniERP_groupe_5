@@ -4,7 +4,7 @@ import "../styles/login_page.css";
 // import InputAdornment from '@material-ui/core/InputAdornment';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField, Button, Divider, Chip, Typography } from "@mui/material";
-import Illutration from "./../composant/Illustration";
+import Illutration from "../components/Illustration";
 
 
 

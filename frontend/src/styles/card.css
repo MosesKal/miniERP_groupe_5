@@ -1,0 +1,63 @@
+.project-card{
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    height: 150px;
+    background-color: white;
+    margin:auto;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.8s ease-in-out;
+  }
+  .project-card:hover {
+    width: 350px;
+    height: 150px;
+    color: aliceblue;
+    background-color: rgb(25, 75, 191);
+    border-radius: 5px;
+    animation: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in-animation {
+    animation: fade-in 1.8s ease-in-out;
+  }
+
+  .project-titre{
+    /* margin: 10px 10px; */
+    font-size: larger;
+    /* color: rgba(42, 40, 40, 0.5); */
+  }
+  .project-cota{
+    display: flex;
+    width: 50%;
+    padding-top: 40px;
+    text-align: center;
+    flex-direction: column;
+  }
+  .project-Nbre{
+    /* margin: 15px 25px 0 ; */
+    font-size: 32px;
+    font-weight: bold;
+  }
+  /* .icon-cotation{
+    width: 34px;
+    height: 34px;
+    margin: 15px;
+    
+  } */
+  .project-Icon{
+    margin: 30px 25px;
+    width: 72px;
+    height: 72px;
+    
+    border-radius: 50%;
+  }
