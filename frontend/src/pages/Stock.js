@@ -1,7 +1,8 @@
 import React from "react";
 import Sidebar from "../components/sidebar";
 import Navright from "../components/navright";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
+import Tableau from "../components/table";
 
 import "../styles/stock.css"
 
@@ -31,6 +32,7 @@ function Stock (){
                         </div>
                     </div>
                     <div className="">
+                      <Tableau />
                     </div>
            
             </div>
