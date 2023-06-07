@@ -33,7 +33,6 @@ function Stock (){
                     </div>
                     <div className="">
                       <Tableau />
-
                     </div>
            
             </div>

@@ -11,7 +11,6 @@ function Comptabilite (){
          <Navbar/>
             <div className="project-stock">
                 <h1>Comptabilite</h1>
-
                     <div className="">
 
                     </div>
