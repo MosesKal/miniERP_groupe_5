@@ -31,7 +31,6 @@ function Stock (){
                         </div>
                     </div>
                     <div className="">
-
                     </div>
            
             </div>
