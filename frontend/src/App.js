@@ -1,13 +1,13 @@
-
+import React, { Fragment } from "react";
+import Login from "./pages/Authentication/Login";
 import "./styles/App.css";
 
-
-function App() {
+const App = () => {
   return (
-    <div className="app">
- 
-    </div>
-  )
-}
+    <Fragment>
+      <Login />
+    </Fragment>
+  );
+};
 
 export default App;

@@ -6,6 +6,7 @@ const route = express.Router();
 
 route.post("/register", async (req, res, next) => {
   const { email, password, prenom, nom, telephone } = req.body;
+  console.log(email);
 
   const exists = await db.User.findOne({ where: { email: `${email}` } });
 
@@ -52,6 +53,22 @@ route.get("/users", async (req, res, next) => {
     res.send(users);
   } catch (e) {
     res.status(500).send(e);
+  }
+});
+
+route.post("/users/login", async (req, res, next) => {
+
+  try {
+    const user = await db.User.findOne({where : {email : req.body.email}});
+    // res.send(user);
+    if (!user) throw new Error("Erreur, pas possible de se connecter!");
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+    if (!isPasswordValid)
+      throw new Error("Erreur, pas possible de se connecter");
+    res.send(user);
+  } catch (e) {
+    res.status(400).send();
+    console.log("Erreur lors de la connexion");
   }
 });
 
