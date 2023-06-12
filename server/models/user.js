@@ -37,6 +37,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      // authTokens: [
+      //   {
+      //     type: String,
+      //     required: true,
+      //   },
+      // ],
     },
     {
       sequelize,
