@@ -7,18 +7,38 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "./../api/axios";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const NAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-// const EMAIL_REGEX = 
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const PHONE_REGEX = /^(\+243|0)[1-9]\d{8}$/;
+
+// cont TEL_REGEX
+
 const REGISTER_URL = "/register";
 
 const Register = () => {
-  const userRef = useRef();
+
+  const prenomRef = useRef();
+  const nomRef = useRef();
+  const emailRef = useRef();
+  const telephoneRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  const [prenom, setPrenom] = useState("");
+  const [validPrenom, setValidPrenom] = useState(false);
+  const [prenomFocus, setPrenomFocus] = useState(false);
+
+  const [nom, setNom] = useState("");
+  const [validnom, setValidNom] = useState(false);
+  const [nomFocus, setNomFocus] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [validemail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  const [telephone, setTelephone] = useState("");
+  const [validetelephone, setValidTelephone] = useState(false);
+  const [telephoneFocus, setTelephoneFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -31,36 +51,71 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
+/*** useEffect */
+
   useEffect(() => {
-    userRef.current.focus();
+    prenomRef.current.focus();
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    nomRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    telephoneRef.current.focus();
+  }, []);
+
+/*** REGEX ****/
+  useEffect(() => {
+    setValidPrenom(NAME_REGEX.test(prenom));
+  }, [prenom]);
+
+  useEffect(() => {
+    setValidNom(NAME_REGEX.test(nom));
+  }, [nom]);
+
+  useEffect(() => {
+    setValidNom(EMAIL_REGEX.test(email));
+  }, [email]);
+
+  useEffect(() => {
+    setValidNom(PHONE_REGEX.test(telephone));
+  }, [telephone]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
+    
+/**--------- */
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [prenom, nom, email, telephone, pwd, matchPwd]);
+
+/** handleSubmit **/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(user);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
+    const v1 = NAME_REGEX.test(prenom);
+    const v2 = NAME_REGEX.test(nom);
+    const v3 = EMAIL_REGEX.test(email);
+    const v4 = PHONE_REGEX.test(telephone);
+    const v5 = PWD_REGEX.test(pwd);
+
+    if (!v1 || !v5 || !v2 || !v3 || !v4) {
       setErrMsg("Invalid Entry");
       return;
     }
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ user, pwd }),
+        JSON.stringify({ prenom,nom,, pwd }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -72,7 +127,10 @@ const Register = () => {
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
-      setUser("");
+      setPrenom("");
+      setNom("");
+      setEmail("");
+      setTelephone("");
       setPwd("");
       setMatchPwd("");
     } catch (err) {
