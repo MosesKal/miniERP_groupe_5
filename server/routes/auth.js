@@ -1,10 +1,63 @@
 const express = require("express");
 const db = require("../models/");
 const jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
-const user = require("../models/user");
+const bcrypt = require("bcryptjs");
+const user = require("../models/user");     
 
+/** middleware */
+const authentication = require("../middleware/authentication");
+
+/**express */
 const route = express.Router();
+
+route.post("/login", async (req, res, next) => {
+  let token;
+  const { email, password } = req.body;
+  try {
+    const user = await db.User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new Error("Erreur, pas possible de se connecter!");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new Error("Erreur, pas possible de se connecter");
+    }
+
+    try {
+      token = jwt.sign(
+        { userId: user.id, email: user.email },
+        "secretkeyappearshere",
+        { expiresIn: "1h" }
+      );
+    } catch (err) {
+      throw new Error("Erreur, pas possible de se connecter");
+    }
+  } catch (e) {
+    res.status(400).send();
+    console.log("Erreur lors de la connexion");
+  }
+
+  res.status(200).json({
+    success: true,
+    data: {
+      userId: user.id,
+      email: user.email,
+      token: token,
+    },
+  });
+});
+
+route.post("/logout", authentication,async (req, res, next) => {
+
+  try {
+    re
+  } catch (e) {
+
+  }
+
+});
 
 route.post("/register", async (req, res, next) => {
   const { email, password, prenom, nom, telephone } = req.body;
@@ -49,52 +102,13 @@ route.post("/register", async (req, res, next) => {
   });
 });
 
-route.get("/users", async (req, res, next) => {
+route.get("/users", authentication, async (req, res, next) => {
   try {
     const users = await db.User.findAll({});
     res.send(users);
   } catch (e) {
     res.status(500).send(e);
   }
-});
-
-route.post("/users/login", async (req, res, next) => {
-  let token;
-  const { email, password } = req.body;
-  try {
-    const user = await db.User.findOne({ where: { email } });
-
-    if (!user) {
-      throw new Error("Erreur, pas possible de se connecter!");
-    }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      throw new Error("Erreur, pas possible de se connecter");
-    }
-
-    try {
-      token = jwt.sign(
-        { userId: user.id, email: user.email },
-        "secretkeyappearshere",
-        { expiresIn: "1h" }
-      );
-    } catch (err) {
-      throw new Error("Erreur, pas possible de se connecter");
-    }
-  } catch (e) {
-    res.status(400).send();
-    console.log("Erreur lors de la connexion");
-  }
-
-  res.status(200).json({
-    success: true,
-    data: {
-      userId: user.id,
-      email: user.email,
-      token: token,
-    },
-  });
 });
 
 route.get("/users/:id", async (req, res, next) => {
@@ -129,25 +143,6 @@ route.delete("/users/:id", async (req, res, next) => {
     },
   });
   res.send("Deleted!");
-});
-
-route.post("/Login", async (req, res, next) => {
-  console.log("vous arrivez a contacter le back__________");
-  res.send(req.body);
-});
-
-route.get("/accessRessource", (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
-  if (!token) {
-    res
-      .status(200)
-      .json({ success: false, message: "Error! Token was not provided." });
-  }
-  const decodedToken = jwt.verify(token, "secretkeyappearshere");
-  res.status(200).json({
-    success: true,
-    data: { userId: decodedToken.userId, email: decodedToken.email },
-  });
 });
 
 module.exports = route;
