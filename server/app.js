@@ -3,18 +3,12 @@ const auth = require("./routes/auth");
 const cors = require("cors");
 
 const app = express();
-
 app.use(cors());
+
 app.use(express.json());
 
 app.use(auth);
 
-
-app.use(cors());app.use(cors());
-app.use(express.json());
-
-app.use(auth); 
-
-app.listen(2000, ()=>{
-    console.log("Listening on 2000");
+app.listen(2000, () => {
+  console.log("Listening on 2000");
 });

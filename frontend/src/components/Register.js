@@ -100,7 +100,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if button enabled with JS hack
     const v1 = NAME_REGEX.test(prenom);
     const v2 = NAME_REGEX.test(nom);
     const v3 = EMAIL_REGEX.test(email);
@@ -114,18 +113,17 @@ const Register = () => {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ prenom, nom, email, pwd }),
+        JSON.stringify({ prenom, nom, email, telephone, pwd }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          // withCredentials: true,
         }
       );
       console.log(response?.data);
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
       setSuccess(true);
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
+
       setPrenom("");
       setNom("");
       setEmail("");
@@ -143,6 +141,7 @@ const Register = () => {
       errRef.current.focus();
     }
   };
+  console.log("response");
 
   return (
     <>
@@ -255,7 +254,7 @@ const Register = () => {
               />
               <FontAwesomeIcon
                 icon={faTimes}
-                className={validemail || !email ? "hide" : "invalid"}
+                className={!email ? "hide" : "invalid"}
               />
             </label>
             <input
