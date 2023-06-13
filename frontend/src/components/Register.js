@@ -17,7 +17,6 @@ const PHONE_REGEX = /^(\+243|0)[1-9]\d{8}$/;
 const REGISTER_URL = "/register";
 
 const Register = () => {
-
   const prenomRef = useRef();
   const nomRef = useRef();
   const emailRef = useRef();
@@ -37,7 +36,7 @@ const Register = () => {
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [telephone, setTelephone] = useState("");
-  const [validetelephone, setValidTelephone] = useState(false);
+  const [validtelephone, setValidTelephone] = useState(false);
   const [telephoneFocus, setTelephoneFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
@@ -51,7 +50,7 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-/*** useEffect */
+  /*** useEffect */
 
   useEffect(() => {
     prenomRef.current.focus();
@@ -69,7 +68,7 @@ const Register = () => {
     telephoneRef.current.focus();
   }, []);
 
-/*** REGEX ****/
+  /*** REGEX ****/
   useEffect(() => {
     setValidPrenom(NAME_REGEX.test(prenom));
   }, [prenom]);
@@ -79,25 +78,25 @@ const Register = () => {
   }, [nom]);
 
   useEffect(() => {
-    setValidNom(EMAIL_REGEX.test(email));
+    setValidEmail(EMAIL_REGEX.test(email));
   }, [email]);
 
   useEffect(() => {
-    setValidNom(PHONE_REGEX.test(telephone));
+    setValidTelephone(PHONE_REGEX.test(telephone));
   }, [telephone]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
-    
-/**--------- */
+
+  /**--------- */
 
   useEffect(() => {
     setErrMsg("");
   }, [prenom, nom, email, telephone, pwd, matchPwd]);
 
-/** handleSubmit **/
+  /** handleSubmit **/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +114,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ prenom,nom,, pwd }),
+        JSON.stringify({ prenom, nom, email, pwd }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -165,34 +164,37 @@ const Register = () => {
           </p>
           <h1>Register</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-              Username:
+            {/**------------------------------------------------------------------ */}
+            <label htmlFor="prenom">
+              Prenom:
               <FontAwesomeIcon
                 icon={faCheck}
-                className={validName ? "valid" : "hide"}
+                className={validPrenom ? "valid" : "hide"}
               />
               <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
+                className={validPrenom || !prenom ? "hide" : "invalid"}
               />
             </label>
             <input
               type="text"
-              id="username"
-              ref={userRef}
+              id="prenom"
+              ref={prenomRef}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={(e) => setPrenom(e.target.value)}
+              value={prenom}
               required
-              aria-invalid={validName ? "false" : "true"}
-              aria-describedby="uidnote"
-              onFocus={() => setUserFocus(true)}
-              onBlur={() => setUserFocus(false)}
+              aria-invalid={validPrenom ? "false" : "true"}
+              aria-describedby="uidnote1"
+              onFocus={() => setPrenomFocus(true)}
+              onBlur={() => setPrenomFocus(false)}
             />
             <p
-              id="uidnote"
+              id="uidnote1"
               className={
-                userFocus && user && !validName ? "instructions" : "offscreen"
+                prenomFocus && prenom && !validPrenom
+                  ? "instructions"
+                  : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -202,6 +204,130 @@ const Register = () => {
               <br />
               Letters, numbers, underscores, hyphens allowed.
             </p>
+            {/**----------------------------------------------------------------------- */}
+
+            {/**------------------------------------------------------------------ */}
+            <label htmlFor="nom">
+              Nom :
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={validnom ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={validnom || !nom ? "hide" : "invalid"}
+              />
+            </label>
+            <input
+              type="text"
+              id="prenom"
+              ref={nomRef}
+              autoComplete="off"
+              onChange={(e) => setNom(e.target.value)}
+              value={nom}
+              required
+              aria-invalid={validnom ? "false" : "true"}
+              aria-describedby="uidnote2"
+              onFocus={() => setNomFocus(true)}
+              onBlur={() => setNomFocus(false)}
+            />
+            <p
+              id="uidnote2"
+              className={
+                nomFocus && nom && !validnom ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              4 to 24 characters.
+              <br />
+              Must begin with a letter.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+            {/**----------------------------------------------------------------------- */}
+
+            {/**------------------------------------------------------------------ */}
+            <label htmlFor="email">
+              Email :
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={email ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={validemail || !email ? "hide" : "invalid"}
+              />
+            </label>
+            <input
+              type="email"
+              id="email"
+              ref={emailRef}
+              autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+              aria-invalid={validemail ? "false" : "true"}
+              aria-describedby="uidnote3"
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+            />
+            <p
+              id="uidnote3"
+              className={
+                emailFocus && email && !setEmail ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              4 to 24 characters.
+              <br />
+              Must begin with a letter.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+
+            {/**----------------------------------------------------------------------- */}
+            {/**------------------------------------------------------------------ */}
+            <label htmlFor="telephone">
+              Telephone :
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={telephone ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={validtelephone || !telephone ? "hide" : "invalid"}
+              />
+            </label>
+            <input
+              type="text"
+              id="telephone"
+              ref={telephoneRef}
+              autoComplete="off"
+              onChange={(e) => setTelephone(e.target.value)}
+              value={telephone}
+              required
+              aria-invalid={validtelephone ? "false" : "true"}
+              aria-describedby="uidnote4"
+              onFocus={() => setTelephoneFocus(true)}
+              onBlur={() => setTelephoneFocus(false)}
+            />
+            <p
+              id="uidnote4"
+              className={
+                telephoneFocus && telephone && !setTelephone
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              4 to 24 characters.
+              <br />
+              Must begin with a letter.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
+
+            {/**----------------------------------------------------------------------- */}
 
             <label htmlFor="password">
               Password:
@@ -276,7 +402,16 @@ const Register = () => {
             </p>
 
             <button
-              disabled={!validName || !validPwd || !validMatch ? true : false}
+              disabled={
+                !validPrenom ||
+                !validnom ||
+                !validemail ||
+                !validtelephone ||
+                !validPwd ||
+                !validMatch
+                  ? true
+                  : false
+              }
             >
               Sign Up
             </button>
