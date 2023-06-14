@@ -1,0 +1,26 @@
+.login-illustration {
+  height: 100vh;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.login-illustration {
+    padding-left: 99px;
+    padding-top: 90px;
+    background: rgb(18, 38, 71);
+    background: radial-gradient(circle,
+        rgba(18, 38, 71, 1) 0%,
+        rgba(9, 14, 35, 1) 100%);
+  }
+  
+  .illustration-background {
+    background-image: url('./../pngwing.com.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50%;
+    height: 50%; 
+  
+  }

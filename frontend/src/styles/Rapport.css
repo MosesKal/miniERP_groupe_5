@@ -1,0 +1,55 @@
+.project-Rapport {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 15%;
+    padding-left: 20px;
+}
+.project-titles {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    height: 50px;
+    margin: 30px 20px 0px;
+    border-bottom: 1px solid rgb(187, 184, 184);
+}
+.navbar-searchs {
+     display: flex;
+    justify-content: space-between;
+    height: 35px;
+    padding-top: 10px;
+    color: rgb(127, 131, 138);
+    border: 1px solid rgb(201, 200, 200);
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 900px;
+}
+.navbar-searchs input {
+    height: 10px;
+    padding-top: 0px;
+    border: solid red;
+    border: none;
+    outline: none;
+    background-color: rgb(233, 233, 240);
+}
+.project-stats,
+.project-stat {
+    color: rgb(28, 28, 29);
+    padding-top: 20px;
+    font-size: larger;
+}
+.Rapport-spam {
+    border-bottom: 1px solid blue;
+    color: blue;
+}
+.project-stats {
+    border-bottom: 2px solid blue;
+
+}
+.contenaire-Rapport {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 58px;
+    margin-bottom: 40px;
+    margin-top: 5px;
+}

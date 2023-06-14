@@ -1,23 +1,20 @@
 import Register from "./components/Register";
 import Login from "./components/Login";
 
-import Home from "./components/Home";
 import Layout from "./components/Layout";
-import Editor from "./components/Editor";
-import Admin from "./components/Admin";
 import Missing from "./components/Missing";
 import Unauthorized from "./components/Unauthorized";
-import Lounge from "./components/Lounge";
 import LinkPage from "./components/LinkPage";
-import RequireAuth from './components/RequireAuth';
+import RequireAuth from "./components/RequireAuth";
 
 import { Routes, Route } from "react-router-dom";
+import Dash from "./components/Dash";
 
 const ROLES = {
-  'MINING' : 'mining',
-  "SELER" : 'seler',
-  "ADMIN" : "admin"
-}
+  MINING: "mining",
+  SELER: "seler",
+  ADMIN: "admin",
+};
 
 const App = () => {
   return (
@@ -30,22 +27,23 @@ const App = () => {
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* we want to protect these routes */}
-        <Route element={<RequireAuth allowedRoles={[ROLES.MINING, ROLES.ADMIN]} />}>
-          <Route path="/" element={<Home />} />
-        </Route>
+        {/* <Route
+          element={<RequireAuth allowedRoles={[ROLES.MINING, ROLES.ADMIN]} />}
+        >
+          <Route path="/" element={<Dash />} />
+        </Route> */}
 
-        <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
+        {/* <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
           <Route path="editor" element={<Editor />} />
-        </Route>
-
+        </Route> */}
 
         <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
-          <Route path="admin" element={<Admin />} />
+          <Route path="admin" element={<Dash/>} />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
+        {/* <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
           <Route path="lounge" element={<Lounge />} />
-        </Route>
+        </Route> */}
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />
