@@ -1,7 +1,6 @@
 const db = require("../models/");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const user = require("../models/user");
 
 const PostLogin = async (req, res, next) => {
   let token;
@@ -30,8 +29,8 @@ const PostLogin = async (req, res, next) => {
     }
     roleUser = user.role;
   } catch (e) {
-    res.status(400).send();
     console.log("Erreur lors de la connexion");
+    return res.status(400).send();
   }
   res.status(200).json({
     success: true,

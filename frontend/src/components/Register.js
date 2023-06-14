@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "./../api/axios";
+import { Link } from "react-router-dom";
 
 const NAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -140,7 +141,6 @@ const Register = () => {
       errRef.current.focus();
     }
   };
-  console.log("response");
 
   return (
     <>
@@ -148,7 +148,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <Link to="/Login">Sign In</Link>
           </p>
         </section>
       ) : (
@@ -218,7 +218,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              id="prenom"
+              id="nom"
               ref={nomRef}
               autoComplete="off"
               onChange={(e) => setNom(e.target.value)}
@@ -414,12 +414,12 @@ const Register = () => {
               Sign Up
             </button>
           </form>
+
           <p>
             Already registered?
             <br />
             <span className="line">
-              {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <Link to="/Login">Sign In</Link>
             </span>
           </p>
         </section>
