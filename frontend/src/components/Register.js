@@ -116,7 +116,6 @@ const Register = () => {
         JSON.stringify({ prenom, nom, email, telephone, pwd }),
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
         }
       );
       console.log(response?.data);
