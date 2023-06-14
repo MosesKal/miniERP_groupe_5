@@ -12,61 +12,17 @@ html {
   color: #fff;
 }
 
-body {
-  min-height: 100vh;
-  /* background-color: dodgerblue; */
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem 0.5rem;
-}
-
-section {
-  width: 100%;
-  max-width: 420px;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  padding-bottom: 1rem;
-}
-
 a,
 a:visited {
-  color: #fff;
+  color: #007ad3;
+  text-decoration: none;
 }
 
 input[type="text"],
 input[type="password"],
 button,
 textarea {
-  font-family: "Nunito", sans-serif;
   font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-}
-
-label,
-button {
-  margin-top: 1rem;
-}
-
-button {
-  padding: 0.5rem;
 }
 
 .instructions {
@@ -110,6 +66,104 @@ button {
   margin-bottom: 0.5rem;
 }
 
+/* div principale contanant la section illustration et le formulaire login */
+
+.login-Containers {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.illustration-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  left: 0;
+  width: 50%;
+  height: 100vh;
+  background: rgb(18, 38, 71);
+  background: linear-gradient(
+    90deg,
+    rgba(18, 38, 71, 1) 0%,
+    rgba(9, 14, 35, 1) 100%
+  );
+}
+
+.logo {
+  color: white;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.app-title {
+  margin-left: 10px;
+  font-size: 46px;
+}
+.icon-logo {
+  font-size: 43px;
+}
+.icon-illustration {
+  width: 400px;
+  height: 400px;
+  margin-top: 120px;
+  margin-right: 160px;
+}
+
+.login-form-container {
+  right: 0;
+  width: 50%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.signin-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e1e1e;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+  max-width: 420px;
+  margin: auto;
+}
+
+input,
+.btn-signup {
+  width: 350px;
+  height: 50px;
+  margin-top: 10px;
+}
+input {
+  padding-left: 20px;
+}
+
+.btn-signup {
+  margin-top: 20px;
+  text-align: center;
+  background-color: #007ad3;
+  color: white;
+  font-weight: 600;
+}
+label {
+  font-size: 16px;
+}
+
+.signup-link {
+  display: flex;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
 .line {
-  display: inline-block;
+  margin-left: 20px;
+  text-decoration: none;
 }

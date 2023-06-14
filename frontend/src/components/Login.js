@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Icon } from "@iconify/react";
+import imgIllustration from "../assets/Illustration.png";
 
 import axios from "../api/axios";
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { setAuth} = useAuth();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -63,45 +65,58 @@ const Login = () => {
   };
 
   return (
-    <section>
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errMsg}
-      </p>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Adresse Mail</label>
-        <input
-          type="mail"
-          id="username"
-          ref={userRef}
-          autoComplete="off"
-          onChange={(e) => setUser(e.target.value)}
-          value={user}
-          required
-        />
+    <div className="login-Containers">
+      <section className="illustration-wrapper">
+        <div className="logo">
+          <Icon icon="icon-park-solid:blockchain" className="icon-logo" />
+          <span className="app-title">small-erp</span>
+        </div>
+        <div className="icon-illustration">
+          <img src={imgIllustration} alt="Logo" />
+        </div>
+      </section>
 
-        <label htmlFor="password">password</label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => setPwd(e.target.value)}
-          value={pwd}
-          required
-        />
-        <button>Sign In</button>
-      </form>
-      <p>
-        Need an Account?
-        <br />
-        <span className="line">
-          <Link to="/register">Sign Up</Link>
-        </span>
-      </p>
-    </section>
+      <section className="login-form-container">
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+
+        <form onSubmit={handleSubmit}>
+          <h1 className="signin-title">Sign In</h1>
+          <label htmlFor="username">Adresse Mail</label>
+          <input
+            type="mail"
+            id="username"
+            ref={userRef}
+            autoComplete="off"
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            required
+          />
+
+          <label htmlFor="password">password</label>
+          <input
+            type="password"
+            id="password"
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
+            required
+          />
+          <button className="btn-signup">Sign In</button>
+
+          <div className="signup-link">
+            <p>Need an Account?</p>
+            <span className="line">
+              <Link to="/register">Sign Up</Link>
+            </span>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 };
 
