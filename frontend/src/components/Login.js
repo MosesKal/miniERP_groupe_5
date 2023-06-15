@@ -3,6 +3,8 @@ import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import imgIllustration from "../assets/Illustration.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "../api/axios";
 const LOGIN_URL = "/login";
@@ -10,8 +12,8 @@ const LOGIN_URL = "/login";
 const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef();
   const errRef = useRef();
@@ -49,17 +51,52 @@ const Login = () => {
       setAuth({ roles, accessToken });
       setUser("");
       setPwd("");
-      navigate(from, { replace: true });
+      // navigate(from, { replace: true });
+      navigate(`/${roles}`);
+      console.log(roles);
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No Server Response");
+        setErrMsg(
+          <>
+            <FontAwesomeIcon
+              icon={faExclamationCircle}
+              className="warning-icon"
+            />{" "}
+            No Server Response
+          </>
+        );
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg(
+          <>
+            <FontAwesomeIcon
+              icon={faExclamationCircle}
+              className="warning-icon"
+            />{" "}
+            Missing Username or Password
+          </>
+        );
       } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg(
+          <>
+            <FontAwesomeIcon
+              icon={faExclamationCircle}
+              className="warning-icon"
+            />{" "}
+            Unauthorized
+          </>
+        );
       } else {
-        setErrMsg("Login Failed");
+        setErrMsg(
+          <>
+            <FontAwesomeIcon
+              icon={faExclamationCircle}
+              className="warning-icon"
+            />{" "}
+            Login Failed
+          </>
+        );
       }
+
       errRef.current.focus();
     }
   };
@@ -86,7 +123,7 @@ const Login = () => {
         </p>
 
         <form onSubmit={handleSubmit}>
-          <h1 className="signin-title">Sign In</h1>
+          <h1 className="signin-title">Connexion</h1>
           <label htmlFor="username">Adresse Mail</label>
           <input
             type="mail"
@@ -98,7 +135,7 @@ const Login = () => {
             required
           />
 
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
             id="password"
@@ -106,12 +143,12 @@ const Login = () => {
             value={pwd}
             required
           />
-          <button className="btn-signup">Sign In</button>
+          <button className="btn-signup">Connexion</button>
 
           <div className="signup-link">
-            <p>Need an Account?</p>
+            <p>Vous n'avez pas de compte ?</p>
             <span className="line">
-              <Link to="/register">Sign Up</Link>
+              <Link to="/register">Créer</Link>
             </span>
           </div>
         </form>

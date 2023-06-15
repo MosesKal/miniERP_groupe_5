@@ -1,6 +1,14 @@
 import React from "react";
-import { Divider} from "@mui/material/";
+import {
+  Divider,
+  MenuList,
+  MenuItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material/";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import NavBar from "./components/NavBar";
+import FileAriane from "./components/FileAriane";
 
 const Dash = () => {
   return (
@@ -14,12 +22,24 @@ const Dash = () => {
         <div className="dash-sideBare_nav">
           <Divider />
         </div>
-        <div className="dash-sideBare-menu"></div>
+        <div className="dash-sideBare-menu">
+          <MenuList>
+            <MenuItem>
+              <ListItemIcon>
+                <DashboardIcon fontSize="small" />
+                  <span>Dash</span>
+              </ListItemIcon>
+            </MenuItem>
+          </MenuList>
+        </div>
       </sidebar>
 
       <main className="dash-main">
         <div className="header-bar">
           <NavBar />
+        </div>
+        <div className="fil-ariane">
+          <FileAriane />
         </div>
       </main>
     </div>

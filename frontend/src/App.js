@@ -4,7 +4,6 @@ import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Missing from "./components/Missing";
 import Unauthorized from "./components/Unauthorized";
-import LinkPage from "./components/LinkPage";
 import RequireAuth from "./components/RequireAuth";
 import DashboardSeler from "./components/DashboardSeler";
 import DashboardMining from "./components/DashboardMining";
@@ -23,14 +22,14 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
+        <Route path="/" element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* we want to protect these routes  */}
         <Route element={<RequireAuth allowedRoles={[ROLES.MINING]} />}>
-          <Route path="/" element={<DashboardMining />} />
+          <Route path="/mining" element={<DashboardMining />} />
         </Route>
 
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
@@ -38,11 +37,11 @@ const App = () => {
         </Route> */}
 
         <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
-          <Route path="admin" element={<Dash />} />
+          <Route path="/admin" element={<Dash />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
-          <Route path="/" element={<DashboardSeler />} />
+          <Route path="/seler" element={<DashboardSeler />} />
         </Route>
 
         {/* catch all */}
