@@ -27,7 +27,7 @@ const Dash = () => {
             <MenuItem>
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
-                  <span>Dash</span>
+                  <span className="dash-menu-name">Dashboard</span>
               </ListItemIcon>
             </MenuItem>
           </MenuList>
