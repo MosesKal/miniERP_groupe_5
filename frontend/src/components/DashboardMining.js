@@ -2,13 +2,13 @@ import React from "react";
 import { Divider} from "@mui/material/";
 import NavBar from "./components/NavBar";
 
-const Dash = () => {
+const DashboardMining = () => {
   return (
     <div className="dash-container">
       <sidebar className="dash-sideBare">
         <div className="dash-sideBare_header">
           <div className="dash-sideBare_header__content">
-            <h6>Admin Dashboard</h6>
+            <h6>Admin Mining</h6>
           </div>
         </div>
         <div className="dash-sideBare_nav">
@@ -26,4 +26,4 @@ const Dash = () => {
   );
 };
 
-export default Dash;
+export default DashboardMining;

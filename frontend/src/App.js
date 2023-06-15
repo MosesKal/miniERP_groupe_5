@@ -6,6 +6,8 @@ import Missing from "./components/Missing";
 import Unauthorized from "./components/Unauthorized";
 import LinkPage from "./components/LinkPage";
 import RequireAuth from "./components/RequireAuth";
+import DashboardSeler from "./components/DashboardSeler";
+import DashboardMining from "./components/DashboardMining";
 
 import { Routes, Route } from "react-router-dom";
 import Dash from "./components/Dash";
@@ -26,24 +28,22 @@ const App = () => {
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* we want to protect these routes */}
-        {/* <Route
-          element={<RequireAuth allowedRoles={[ROLES.MINING, ROLES.ADMIN]} />}
-        >
-          <Route path="/" element={<Dash />} />
-        </Route> */}
+        {/* we want to protect these routes  */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.MINING]} />}>
+          <Route path="/" element={<DashboardMining />} />
+        </Route>
 
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
           <Route path="editor" element={<Editor />} />
         </Route> */}
 
         <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
-          <Route path="admin" element={<Dash/>} />
+          <Route path="admin" element={<Dash />} />
         </Route>
 
-        {/* <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
-          <Route path="lounge" element={<Lounge />} />
-        </Route> */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
+          <Route path="/" element={<DashboardSeler />} />
+        </Route>
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />
