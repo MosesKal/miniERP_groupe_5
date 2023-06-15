@@ -5,10 +5,15 @@ import {
   MenuItem,
   ListItemText,
   ListItemIcon,
+  Box,
+  Paper,
 } from "@mui/material/";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import NavBar from "./components/NavBar";
 import FileAriane from "./components/FileAriane";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
+import GroupIcon from "@mui/icons-material/Group";
 
 const Dash = () => {
   return (
@@ -27,7 +32,26 @@ const Dash = () => {
             <MenuItem>
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
-                  <span className="dash-menu-name">Dashboard</span>
+                <span className="dash-menu-name">Dashboard</span>
+              </ListItemIcon>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <ApartmentIcon fontSize="small" />
+                <span className="dash-menu-name">Gestion Entreprise</span>
+              </ListItemIcon>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <ProductionQuantityLimitsIcon fontSize="small" />
+                <span className="dash-menu-name">Gestion de Produit</span>
+              </ListItemIcon>
+            </MenuItem>
+
+            <MenuItem>
+              <ListItemIcon>
+                <GroupIcon fontSize="small" />
+                <span className="dash-menu-name">Gestion Utilisateur</span>
               </ListItemIcon>
             </MenuItem>
           </MenuList>
@@ -40,6 +64,15 @@ const Dash = () => {
         </div>
         <div className="fil-ariane">
           <FileAriane />
+        </div>
+        <div className="titre-dash">
+          <h4>Aperçu</h4>
+        </div>
+        <div className="container-card-apercu">
+          <div className="apercu-1"></div>
+          <div className="apercu-2"></div>
+          <div className="apercu-3"></div>
+          <div className="apercu-4"></div>
         </div>
       </main>
     </div>

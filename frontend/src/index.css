@@ -286,10 +286,31 @@ label {
 .nav-bar {
 }
 
+.titre-dash {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 60px;
+}
+
 .fil-ariane {
   margin-top: 50px;
   margin-left: 60px;
 }
 .dash-menu-name {
-  margin-left: 10px;
+  margin-left: 20px;
+}
+
+.container-card-apercu {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 8%;
+  margin-left: 60px;
+}
+
+.apercu-1, .apercu-2, .apercu-3, .apercu-4{
+  width: 20%;
+  background-color: #fdfdfd;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
