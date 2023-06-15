@@ -6,15 +6,28 @@
   box-sizing: border-box;
 }
 
+:root {
+  --white: #fff;
+  --primary-blue: #007ad3;
+  --primary-red: #fdeded;
+  --input-width: 350px;
+  --hover-color: rgba(0, 122, 211, 0.7);
+  --border-color: rgb(53, 53, 53);
+  --background-color-start: rgb(18, 38, 71);
+  --background-color-end: rgb(9, 14, 35);
+  --error-message: #5f2120;
+  --warning-message: rgba(211, 47, 47);
+}
+
 html {
   font-family: "Nunito", sans-serif;
   font-size: 22px;
-  color: #fff;
+  color: var(--white);
 }
 
 a,
 a:visited {
-  color: #007ad3;
+  color: var(--primary-blue);
   text-decoration: none;
 }
 
@@ -58,24 +71,36 @@ textarea {
   margin-left: 0.25rem;
 }
 
+.warning-icon {
+  color: var(--warning-message);
+  margin-right: 10px;
+}
+
 .errmsg {
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
+  width: 360px;
+  margin: auto;
+  border-radius: 5px;
+  background: var(--primary-red);
+  text-align: center;
+  color: var(--error-message);
+  font-size: 14px;
+  font-weight: 400;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 /* div principale contanant la section illustration et le formulaire login */
 
-.login-Containers {
+.login-Containers,
+.register-containers {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.illustration-wrapper {
+.illustration-wrapper,
+.illustration-wrapper-register {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,16 +108,16 @@ textarea {
   left: 0;
   width: 50%;
   height: 100vh;
-  background: rgb(18, 38, 71);
+  background: var(--background-color-start);
   background: linear-gradient(
     90deg,
-    rgba(18, 38, 71, 1) 0%,
-    rgba(9, 14, 35, 1) 100%
+    var(--background-color-start) 0%,
+    var(--background-color-end) 100%
   );
 }
 
 .logo {
-  color: white;
+  color: var(--white);
   font-weight: 700;
   margin-top: 20px;
 }
@@ -110,16 +135,21 @@ textarea {
   margin-right: 160px;
 }
 
-.login-form-container {
+.login-form-container,
+.register-former-container {
   right: 0;
   width: 50%;
-  height: 450px;
+  height: auto;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
 
-.signin-title {
+.register-former-container {
+  padding-top: 60px;
+}
+.signin-title,
+.signup-title {
   font-size: 32px;
   font-weight: 700;
   color: #1e1e1e;
@@ -127,6 +157,7 @@ textarea {
 }
 
 form {
+  font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -137,24 +168,44 @@ form {
 }
 
 input,
-.btn-signup {
-  width: 350px;
+.btn-signup,
+.btn-signin {
+  width: var(--input-width);
   height: 50px;
   margin-top: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
 }
 input {
   padding-left: 20px;
 }
 
-.btn-signup {
+input:focus {
+  font-size: 16px;
+  font-weight: 300;
+  border-color: var(--primary-blue);
+  outline: none;
+}
+
+.btn-signup,
+.btn-signin {
+  font-size: 16px;
   margin-top: 20px;
   text-align: center;
-  background-color: #007ad3;
-  color: white;
+  background-color: var(--primary-blue);
+  color: var(--white);
   font-weight: 600;
+  border: 1px solid white;
 }
+
+.btn-signup:hover,
+.btn-signin:hover {
+  background-color: var(--hover-color);
+}
+
 label {
   font-size: 16px;
+  margin-top: 10px;
 }
 
 .signup-link {
@@ -166,4 +217,76 @@ label {
 .line {
   margin-left: 20px;
   text-decoration: none;
+}
+
+.formRegister {
+  margin-bottom: 100px;
+  padding-bottom: 0;
+}
+
+/** dashboard-general*/
+
+.dash-container {
+  width: 100vw;
+  height: 100vw;
+  background-color: #f2f2f2;
+  display: flex;
+}
+
+.dash-sideBare {
+  width: 15%;
+  height: 100%;
+  background-color: #fdfdfd;
+}
+.dash-sideBare_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4%;
+}
+.dash-sideBare-menu {
+  padding-top: 40px;
+}
+
+.dash-main {
+  width: 85%;
+}
+
+.header-bar {
+  height: 4%;
+  background-color: #fdfdfd;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+}
+.header-bar-search {
+  width: 70%;
+}
+.search-container {
+  width: 50%;
+}
+.header-bar-avatar {
+  width: 30%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 10px;
+  align-items: center;
+}
+.block-avatar {
+  margin-left: 10px;
+}
+.block-badge {
+  margin-right: 20px;
+}
+.header-bar-avatar--avatar {
+}
+.header-bar-avatar--notification {
+}
+
+.nav-bar {
+}
+
+.fil-ariane {
+  margin-top: 50px;
+  margin-left: 60px;
 }
