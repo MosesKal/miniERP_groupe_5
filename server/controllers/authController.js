@@ -5,17 +5,31 @@ const bcrypt = require("bcryptjs");
 const PostLogin = async (req, res, next) => {
   let token;
   let roleUser;
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  email = email.trim();
+
   try {
     const user = await db.User.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error("Erreur, pas possible de se connecter!");
+      return res
+        .status(401)
+        .json({
+          success: false,
+          message: "Erreur, impossible de se connecter !",
+        });
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error("Erreur, pas possible de se connecter");
+      return res
+        .status(401)
+        .json({
+          success: false,
+          message: "Erreur, impossible de se connecter !",
+        });
     }
 
     try {
@@ -24,14 +38,27 @@ const PostLogin = async (req, res, next) => {
         "secretkeyappearshere",
         { expiresIn: "1h" }
       );
+
+      // Sauvegarde du token dans la colonne "Tokens"
+      user.Tokens = token;
+      await user.save();
     } catch (err) {
-      throw new Error("Erreur, pas possible de se connecter");
+      return res
+        .status(500)
+        .json({
+          success: false,
+          message: "Erreur, impossible de se connecter !",
+        });
     }
+
     roleUser = user.role;
   } catch (e) {
     console.log("Erreur lors de la connexion");
-    return res.status(400).send();
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur lors de la connexion" });
   }
+
   res.status(200).json({
     success: true,
     data: {
@@ -56,11 +83,9 @@ const PostRegister = async (req, res, next) => {
     // Check if the email already exists
     const userExists = await db.User.findOne({ where: { email: email } });
     if (userExists) {
-      return res
-        .status(400)
-        .json({
-          error: "Cet email est déjà utilisé par un autre utilisateur.",
-        });
+      return res.status(400).json({
+        error: "Cet email est déjà utilisé par un autre utilisateur.",
+      });
     }
 
     // Generate the password hash
