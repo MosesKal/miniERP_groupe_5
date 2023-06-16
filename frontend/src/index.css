@@ -19,6 +19,9 @@
   --warning-message: rgba(211, 47, 47);
   --input-height: 45px;
 }
+.App {
+  position: fixed;
+}
 
 html {
   font-family: "Nunito", sans-serif;
