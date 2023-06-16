@@ -5,7 +5,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.App {
+  width: 100vw;
+  height: 100vh;
+  position:fixed;
+}
 :root {
   --white: #fff;
   --primary-blue: #007ad3;
@@ -249,52 +253,18 @@ label {
 }
 
 .dash-main {
-  width: 85%;
-}
-
-.header-bar {
-  height: 4%;
-  background-color: #fdfdfd;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-  display: flex;
-  align-items: center;
-}
-.header-bar-search {
-  width: 70%;
-}
-.search-container {
-  width: 50%;
-}
-.header-bar-avatar {
-  width: 30%;
-  display: flex;
-  flex-direction: row-reverse;
-  padding-right: 10px;
-  align-items: center;
-}
-.block-avatar {
-  margin-left: 10px;
-}
-.block-badge {
-  margin-right: 20px;
-}
-.header-bar-avatar--avatar {
-}
-.header-bar-avatar--notification {
-}
-
-.nav-bar {
+  width: 100%;
 }
 
 .titre-dash {
-  margin-top: 40px;
-  margin-bottom: 30px;
-  margin-left: 60px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 30px;
 }
 
 .fil-ariane {
-  margin-top: 50px;
-  margin-left: 60px;
+  margin-top: 10px;
+  margin-left: 30px;
 }
 .dash-menu-name {
   margin-left: 20px;
@@ -303,9 +273,9 @@ label {
 .container-card-apercu {
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  height: 8%;
-  margin-left: 60px;
+  width: 100%;
+  height: 5%;
+  padding-left: 30px;
 }
 .container-card-stat {
   display: flex;
@@ -331,3 +301,16 @@ label {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
 }
+
+.container-card-apercu-st {
+  display: flex;
+}
+.container-stat {
+  display: flex;
+  width: 100%;
+  height: 25%;
+}
+.param{
+  margin-top: 450px;
+}
+

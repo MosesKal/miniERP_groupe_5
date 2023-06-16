@@ -5,59 +5,74 @@ import {
   MenuItem,
   ListItemText,
   ListItemIcon,
-  Box,
-  Paper,
 } from "@mui/material/";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import NavBar from "./components/NavBar";
 import FileAriane from "./components/FileAriane";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
-import GroupIcon from "@mui/icons-material/Group";
-import CardStat from "./components/CardStat";
+import { NavLink } from "react-router-dom";
+
 
 const Dash = () => {
   return (
     <div className="dash-container">
-      <sidebar className="dash-sideBare">
-        <div className="dash-sideBare_header">
-          <div className="dash-sideBare_header__content">
-            <h6>Admin Dashboard</h6>
-          </div>
+    <sidebar className="dash-sideBare">
+      <div className="dash-sideBare_header">
+        <div className="dash-sideBare_header__content">
+          <h6>Admin Dashboard</h6>
         </div>
-        <div className="dash-sideBare_nav">
-          <Divider />
-        </div>
-        <div className="dash-sideBare-menu">
-          <MenuList>
-            <MenuItem>
+      </div>
+      <div className="dash-sideBare_nav">
+        <Divider />
+      </div>
+      <div className="dash-sideBare-menu">
+        <MenuList>
+          <MenuItem>
+            <NavLink to="/seler/dashboard">
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
                 <span className="dash-menu-name">Dashboard</span>
               </ListItemIcon>
-            </MenuItem>
-            <MenuItem>
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to="/seler/comptabilite">
               <ListItemIcon>
                 <ApartmentIcon fontSize="small" />
-                <span className="dash-menu-name">Gestion Entreprise</span>
+                <span className="dash-menu-name">Comptabilite</span>
               </ListItemIcon>
-            </MenuItem>
-            <MenuItem>
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to="/seler/gestionCommande">
               <ListItemIcon>
                 <ProductionQuantityLimitsIcon fontSize="small" />
-                <span className="dash-menu-name">Gestion de Produit</span>
+                <span className="dash-menu-name">Gestion de commande</span>
               </ListItemIcon>
-            </MenuItem>
+            </NavLink>
+          </MenuItem>
 
-            <MenuItem>
+          <MenuItem>
+            <NavLink to="/seler/gestionCommande">
               <ListItemIcon>
-                <GroupIcon fontSize="small" />
-                <span className="dash-menu-name">Gestion Utilisateur</span>
+                <ProductionQuantityLimitsIcon fontSize="small" />
+                <span className="dash-menu-name">Gestion de stock</span>
               </ListItemIcon>
-            </MenuItem>
-          </MenuList>
-        </div>
-      </sidebar>
+            </NavLink>
+          </MenuItem>
+
+          <MenuItem>
+            <NavLink to="/seler/gestionCommande">
+              <ListItemIcon>
+                <ProductionQuantityLimitsIcon fontSize="small" />
+                <span className="dash-menu-name">Plan de production</span>
+              </ListItemIcon>
+            </NavLink>
+          </MenuItem>
+        </MenuList>
+      </div>
+    </sidebar>
 
       <main className="dash-main">
         <div className="header-bar">

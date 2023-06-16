@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
@@ -13,68 +14,30 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut} from "react-chartjs-2";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+const data = {
+  labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+  datasets: [
+    {
+      label: "Ventes hebdomadaires",
+      data: [12, 19, 3, 5, 2, 3, 8],
+      fill: false,
+      borderColor: "rgba(75, 192, 192, 1)",
+      tension: 0.1,
+    },
+  ],
+};
 
-export default function CardStat() {
-  const [expanded, setExpanded] = React.useState(false);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+export default function CardStat({ size }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={
-          <DataSaverOffIcon sx={{ bgcolor: red[500] }} aria-label="recipe" />
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      />
+    <Card sx={{ display: "flex", width: size ? size : 1 / 2, marginLeft: 5 }}>
       <CardContent>
-        <Typography variant="body2" color="text.secondary"></Typography>
+        <Doughnut data={data} />
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent></CardContent>
-      </Collapse>
     </Card>
   );
 }

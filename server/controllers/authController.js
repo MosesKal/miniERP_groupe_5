@@ -50,7 +50,12 @@ const PostLogout = async (req, res, next) => {
 };
 
 const PostRegister = async (req, res, next) => {
-  const { email, password, prenom, nom, telephone } = req.body;
+  let { email, password, prenom, nom, telephone } = req.body;
+  email = email.trim();
+  prenom = prenom.trim();
+  password = "abcd@ABCD1"
+  nom = nom.trim();
+  telephone = telephone.trim();
 
   const exists = await db.User.findOne({ where: { email: `${email}` } });
 
