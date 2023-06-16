@@ -53,8 +53,10 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: {
             msg: "L'email doit être une adresse email valide.",
           },
-          async isUniqueEmail(value, { model }) {
-            const user = await model.findOne({ where: { email: value } });
+          async isUniqueEmail(value) {
+            const user = await this.constructor.findOne({
+              where: { email: value },
+            });
             if (user) {
               throw new Error(
                 "Cet email est déjà utilisé par un autre utilisateur."
@@ -72,9 +74,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Le numéro de téléphone est requis.",
           },
           isValidPhoneNumber(value) {
-            if (!/^(\+\d{1,3})?\d{6,}$/.test(value)) {
+            const phoneNumberRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+            if (!phoneNumberRegex.test(value)) {
               throw new Error(
-                "Le numéro de téléphone doit être un numéro valide."
+                "Le numéro de téléphone doit être un numéro valide au format international."
               );
             }
           },

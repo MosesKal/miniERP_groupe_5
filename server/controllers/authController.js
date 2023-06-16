@@ -50,50 +50,50 @@ const PostLogout = async (req, res, next) => {
 };
 
 const PostRegister = async (req, res, next) => {
-  let { email, password, prenom, nom, telephone } = req.body;
-  email = email.trim();
-  prenom = prenom.trim();
-  password = "abcd@ABCD1"
-  nom = nom.trim();
-  telephone = telephone.trim();
+  const { email, password, prenom, nom, telephone } = req.body;
 
-  const exists = await db.User.findOne({ where: { email: `${email}` } });
-
-  if (exists) {
-    res.send("Exist");
-    return;
-  }
-
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      console.error(err);
-      res.send("Error");
-      return;
-    }
-    bcrypt.hash(`${password}`, salt, (err, hash) => {
-      if (err) {
-        console.error(err);
-        res.send("Error");
-        return;
-      }
-
-      db.User.create({
-        prenom: `${prenom}`,
-        nom: `${nom}`,
-        email: `${email}`,
-        telephone: `${telephone}`,
-        password: hash,
-      })
-        .then(() => {
-          console.log("Admin user created successfully.");
-          res.send("User created successfully");
-        })
-        .catch((err) => {
-          console.error("Failed to create admin user:", err);
-          res.send("Failed to create admin user");
+  try {
+    // Check if the email already exists
+    const userExists = await db.User.findOne({ where: { email: email } });
+    if (userExists) {
+      return res
+        .status(400)
+        .json({
+          error: "Cet email est déjà utilisé par un autre utilisateur.",
         });
+    }
+
+    // Generate the password hash
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create the user in the database
+    const newUser = await db.User.create({
+      prenom: prenom,
+      nom: nom,
+      email: email,
+      telephone: telephone,
+      password: hashedPassword,
     });
-  });
+
+    console.log("Admin user created successfully.");
+    res
+      .status(201)
+      .json({ message: "Utilisateur créé avec succès.", user: newUser });
+  } catch (error) {
+    if (error.name === "SequelizeValidationError") {
+      // Récupérer les erreurs de validation
+      const validationErrors = error.errors.map((err) => ({
+        field: err.path,
+        message: err.message,
+      }));
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
+    console.error("Failed to create admin user:", error);
+    res.status(500).json({ error: "Échec de la création de l'utilisateur." });
+  }
 };
 
 const PostForgotPassword = async (req, res, next) => {};
