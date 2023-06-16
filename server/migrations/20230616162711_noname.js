@@ -3,47 +3,47 @@ const Sequelize = require("sequelize");
 /**
  * Actions summary:
  *
- * changeColumn(categorieId) => "Produits"
- * changeColumn(categorieId) => "Produits"
+ * addColumn(CotationId) => "Offres"
+ * addColumn(cotationId) => "Offres"
  *
  */
 
 const info = {
-  revision: 5,
+  revision: 16,
   name: "noname",
-  created: "2023-06-15T21:47:38.412Z",
+  created: "2023-06-16T16:27:11.195Z",
   comment: "",
 };
 
 const migrationCommands = (transaction) => [
   {
-    fn: "changeColumn",
+    fn: "addColumn",
     params: [
-      "Produits",
-      "categorieId",
+      "Offres",
+      "CotationId",
       {
         type: Sequelize.INTEGER,
+        field: "CotationId",
         onUpdate: "CASCADE",
-        onDelete: "NO ACTION",
-        references: { model: "categorie_produits", key: "id" },
+        onDelete: "SET NULL",
+        references: { model: "Cotations", key: "id" },
         allowNull: true,
-        field: "categorieId",
       },
       { transaction },
     ],
   },
   {
-    fn: "changeColumn",
+    fn: "addColumn",
     params: [
-      "Produits",
-      "categorieId",
+      "Offres",
+      "cotationId",
       {
         type: Sequelize.INTEGER,
         onUpdate: "CASCADE",
         onDelete: "NO ACTION",
-        references: { model: "categorie_produits", key: "id" },
+        references: { model: "Cotations", key: "id" },
         allowNull: true,
-        field: "categorieId",
+        field: "cotationId",
       },
       { transaction },
     ],
@@ -52,22 +52,12 @@ const migrationCommands = (transaction) => [
 
 const rollbackCommands = (transaction) => [
   {
-    fn: "changeColumn",
-    params: [
-      "Produits",
-      "categorieId",
-      { type: Sequelize.INTEGER, field: "categorieId" },
-      { transaction },
-    ],
+    fn: "removeColumn",
+    params: ["Offres", "CotationId", { transaction }],
   },
   {
-    fn: "changeColumn",
-    params: [
-      "Produits",
-      "categorieId",
-      { type: Sequelize.INTEGER, field: "categorieId" },
-      { transaction },
-    ],
+    fn: "removeColumn",
+    params: ["Offres", "cotationId", { transaction }],
   },
 ];
 

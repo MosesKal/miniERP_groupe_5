@@ -22,6 +22,17 @@
                     "field": "avenue",
                     "seqType": "Sequelize.STRING"
                 },
+                "entrepriseId": {
+                    "field": "entrepriseId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Entreprises",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -31,6 +42,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "EntrepriseId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Entreprises",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "EntrepriseId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -84,6 +106,17 @@
                     "field": "phone_client",
                     "seqType": "Sequelize.STRING"
                 },
+                "userId": {
+                    "field": "userId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -93,6 +126,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -131,13 +175,6 @@
         "Commande_clients": {
             "tableName": "Commande_clients",
             "schema": {
-                "id": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "qty_commande": {
                     "field": "qty_commande",
                     "seqType": "Sequelize.STRING"
@@ -155,6 +192,28 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "ClientId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Clients",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "ClientId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CommandeId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Commandes",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "CommandeId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -185,6 +244,17 @@
                     "field": "duree_de_validation",
                     "seqType": "Sequelize.STRING"
                 },
+                "userId": {
+                    "field": "userId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -194,6 +264,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -216,6 +297,17 @@
                     "field": "illustration_categorie",
                     "seqType": "Sequelize.STRING"
                 },
+                "userId": {
+                    "field": "userId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -225,6 +317,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -247,6 +350,17 @@
                     "field": "prix",
                     "seqType": "Sequelize.STRING"
                 },
+                "stockId": {
+                    "field": "stockId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Stocks",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -256,6 +370,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "StockId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Stocks",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "StockId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -309,6 +434,17 @@
                     "field": "total",
                     "seqType": "Sequelize.FLOAT"
                 },
+                "cotationId": {
+                    "field": "cotationId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Cotations",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -318,6 +454,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "CotationId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Cotations",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "CotationId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -350,6 +497,13 @@
                 },
                 "categorieId": {
                     "field": "categorieId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "categorie_produits",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
                 "createdAt": {
@@ -390,6 +544,28 @@
                     "field": "qty",
                     "seqType": "Sequelize.STRING"
                 },
+                "stockId": {
+                    "field": "stockId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Stocks",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CommandeId": {
+                    "field": "CommandeId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Commandes",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -399,6 +575,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "StockId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Stocks",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "StockId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -417,6 +604,28 @@
                     "field": "stock",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "userId": {
+                    "field": "userId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "produitId": {
+                    "field": "produitId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Produits",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -426,6 +635,28 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "ProduitId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Produits",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "ProduitId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -481,6 +712,104 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "EntrepriseId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Entreprises",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "EntrepriseId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "entrepriseId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Entreprises",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "entrepriseId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "CotationProduit": {
+            "tableName": "CotationProduit",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "CotationId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Cotations",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "CotationId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "ProduitId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Produits",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "ProduitId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "OffreProduit": {
+            "tableName": "OffreProduit",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "OffreId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Offres",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "OffreId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "ProduitId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Produits",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "ProduitId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -489,5 +818,5 @@
     "path": "/home/baki/Videos/In-progress/grp3/miniERP_groupe_5/server/migrations/_current.json",
     "backupPath": "/home/baki/Videos/In-progress/grp3/miniERP_groupe_5/server/migrations/_current_bak.json",
     "exists": true,
-    "revision": 4
+    "revision": 19
 }
