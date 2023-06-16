@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import imgIllustration from "../assets/Illustration.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import Switch from "@mui/material/Switch";
 
 import axios from "../api/axios";
 const LOGIN_URL = "/login";
@@ -101,6 +102,7 @@ const Login = () => {
     }
   };
 
+  const label = { inputProps: { "aria-label": "Switch demo" } };
   return (
     <div className="login-Containers">
       <section className="illustration-wrapper">
@@ -124,6 +126,10 @@ const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <h1 className="signin-title">Connexion</h1>
+          <span className="signin-msg">
+            Entrez votre email et votre mot de passe pour vous connectez
+          </span>
+
           <label htmlFor="username">Adresse Mail</label>
           <input
             type="mail"
@@ -143,6 +149,11 @@ const Login = () => {
             value={pwd}
             required
           />
+
+          <div className="rememberMe">
+            <Switch {...label} />
+            Se souvenir de moi
+          </div>
           <button className="btn-signup">Connexion</button>
 
           <div className="signup-link">
