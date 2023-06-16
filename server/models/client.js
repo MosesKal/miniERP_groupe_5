@@ -1,7 +1,10 @@
 "use strict";
+
+const Commande_clients = require("./commande_clients");
+
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Entreprise extends Model {
+  class Client extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,20 +12,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Entreprise.hasMany(models.User);
-      Entreprise.hasOne(models.Adresse);
+      Client.belongsTo(models.User, {
+        foreignKey: "userId",
+      });
+
+      Client.belongsToMany(models.Commande, { through: "Commande_clients" });
     }
   }
-  Entreprise.init(
+  Client.init(
     {
-      logoEntreprise: DataTypes.STRING,
-      nomEntreprise: DataTypes.STRING,
-      descriptionEntreprise: DataTypes.STRING,
+      nom_client: DataTypes.STRING,
+      phone_client: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "Entreprise",
+      modelName: "Client",
     }
   );
-  return Entreprise;
+  return Client;
 };
