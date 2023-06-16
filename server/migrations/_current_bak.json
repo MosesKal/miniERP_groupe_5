@@ -707,19 +707,16 @@
                     "defaultValue": {
                         "value": "admin"
                     },
-                    "allowNull": false,
                     "field": "role",
-                    "seqType": "Sequelize.ENUM('admin', 'seller', 'mining')"
+                    "seqType": "Sequelize.ENUM('admin', 'seler', 'mining')"
                 },
                 "email": {
                     "allowNull": false,
-                    "unique": true,
                     "field": "email",
                     "seqType": "Sequelize.STRING"
                 },
                 "telephone": {
                     "allowNull": false,
-                    "unique": true,
                     "field": "telephone",
                     "seqType": "Sequelize.STRING"
                 },
@@ -730,6 +727,9 @@
                 },
                 "Tokens": {
                     "allowNull": true,
+                    "defaultValue": {
+                        "value": "test"
+                    },
                     "field": "Tokens",
                     "seqType": "Sequelize.STRING"
                 },
@@ -848,5 +848,5 @@
     "path": "/home/moses/Bureau/smallERP/miniERP_groupe_5/server/migrations/_current.json",
     "backupPath": "/home/moses/Bureau/smallERP/miniERP_groupe_5/server/migrations/_current_bak.json",
     "exists": true,
-    "revision": 6
+    "revision": 5
 }
