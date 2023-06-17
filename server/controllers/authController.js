@@ -96,9 +96,9 @@ const PostRegister = async (req, res, next) => {
       email: email,
       telephone: telephone,
       password: hashedPassword,
+      statusCompt : process.env.STATUS_ATTENTE_VALIDATION
     });
 
-    console.log("Admin user created successfully.");
     res
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
@@ -113,7 +113,6 @@ const PostRegister = async (req, res, next) => {
       return res.status(400).json({ errors: validationErrors });
     }
 
-    console.error("Failed to create admin user:", error);
     res.status(500).json({ error: "Échec de la création de l'utilisateur." });
   }
 };

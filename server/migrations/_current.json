@@ -733,6 +733,11 @@
                     "field": "Tokens",
                     "seqType": "Sequelize.STRING"
                 },
+                "StatusCompt": {
+                    "allowNull": true,
+                    "field": "StatusCompt",
+                    "seqType": "Sequelize.STRING"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -847,6 +852,6 @@
     },
     "path": "/home/moses/Bureau/smallERP/miniERP_groupe_5/server/migrations/_current.json",
     "backupPath": "/home/moses/Bureau/smallERP/miniERP_groupe_5/server/migrations/_current_bak.json",
-    "exists": true,
-    "revision": 6
+    "exists": false,
+    "revision": 1
 }
