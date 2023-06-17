@@ -75,7 +75,7 @@ const PostLogout = async (req, res) => {
 
 const PostRegister = async (req, res, next) => {
   const { email, password, prenom, nom, telephone } = req.body;
-  console.log("------------"+password)
+  console.log("------------" + password);
 
   try {
     // Check if the email already exists
@@ -85,11 +85,11 @@ const PostRegister = async (req, res, next) => {
         error: "Cet email est déjà utilisé par un autre utilisateur.",
       });
     }
-    
+
     // Generate the password hash
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    
+
     // Create the user in the database
     const newUser = await db.User.create({
       prenom: prenom,
@@ -97,9 +97,10 @@ const PostRegister = async (req, res, next) => {
       email: email,
       telephone: telephone,
       password: hashedPassword,
-      statusCompt : process.env.STATUS_ATTENTE_VALIDATION
-    });
+      // StatusCompt: 1,
+      StatusCompt: process.env.STATUS_ATTENTE_VALIDATION,
 
+    });
     res
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
@@ -113,7 +114,7 @@ const PostRegister = async (req, res, next) => {
 
       return res.status(400).json({ errors: validationErrors });
     }
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: "Échec de la création de l'utilisateur!!." });
   }
 };
