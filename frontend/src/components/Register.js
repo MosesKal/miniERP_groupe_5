@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "./../api/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import imgIllustration from "../assets/Illustration.png";
 
@@ -20,6 +20,7 @@ const PHONE_REGEX = /^(\+243|0)[1-9]\d{8}$/;
 const REGISTER_URL = "/register";
 
 const Register = () => {
+  const navigate = useNavigate();
   const prenomRef = useRef();
   const nomRef = useRef();
   const emailRef = useRef();
@@ -105,23 +106,21 @@ const Register = () => {
     const v3 = EMAIL_REGEX.test(email);
     const v4 = PHONE_REGEX.test(telephone);
     const v5 = PWD_REGEX.test(pwd);
+    
 
     if (!v1 || !v5 || !v2 || !v3 || !v4) {
       setErrMsg("Invalid Entry");
       return;
     }
     try {
+      const password = pwd;
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ prenom, nom, email, telephone, pwd }),
+        JSON.stringify({ prenom, nom, email, telephone, password }),
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
-      // setSuccess(true);
 
       setPrenom("");
       setNom("");
@@ -129,7 +128,9 @@ const Register = () => {
       setTelephone("");
       setPwd("");
       setMatchPwd("");
+      navigate("/attente");
     } catch (err) {
+      console.log(err);
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 409) {

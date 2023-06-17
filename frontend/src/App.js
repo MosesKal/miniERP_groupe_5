@@ -31,7 +31,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="attente" element={<Attente />} />
+        <Route path="/attente" element={<Attente />} />
 
         {/* we want to protect these routes  */}
         <Route element={<RequireAuth allowedRoles={[ROLES.MINING]} />}>

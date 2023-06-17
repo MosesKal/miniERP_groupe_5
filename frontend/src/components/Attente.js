@@ -1,11 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import imgIllustration from "../assets/Illustration.png";
-
+import { Typography } from "@mui/material";
 
 const Attente = () => {
-
-
   return (
     <div className="register-containers">
       {/* {success ? (
@@ -27,7 +26,8 @@ const Attente = () => {
       </section>
 
       <section className="register-former-container">
-
+        <Typography variant="h3">Page d'attente</Typography>
+        <Link to="/">Accueil</Link>
       </section>
     </div>
   );
