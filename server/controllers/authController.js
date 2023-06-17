@@ -13,23 +13,19 @@ const PostLogin = async (req, res, next) => {
     const user = await db.User.findOne({ where: { email } });
 
     if (!user) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Erreur, impossible de se connecter !",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Erreur, impossible de se connecter !",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
 
     try {
@@ -43,12 +39,10 @@ const PostLogin = async (req, res, next) => {
       user.Tokens = token;
       await user.save();
     } catch (err) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Erreur, impossible de se connecter !",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
 
     roleUser = user.role;
@@ -68,12 +62,15 @@ const PostLogin = async (req, res, next) => {
   });
 };
 
-const PostLogout = async (req, res, next) => {
-  async (req, res, next) => {
-    try {
-      re;
-    } catch (e) {}
-  };
+const PostLogout = async (req, res) => {
+  const { user } = req;
+  try {
+    user.Tokens = null;
+    await user.save();
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur lors de la déconnexion" });
+  }
 };
 
 const PostRegister = async (req, res, next) => {

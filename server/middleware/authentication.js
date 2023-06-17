@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
+const db = require("../models/");
 
 const authentication = (req, res, next) => {
   try {
@@ -21,15 +21,16 @@ const authentication = (req, res, next) => {
 };
 
 const verifySessionToken = async (req, res, next) => {
-  const { sessionToken } = req.headers; // Récupérer le token de session depuis les headers de la requête
+  const { tokens } = req.headers; // Récupérer le token de session depuis les headers de la requête 
+  
 
   // Vérifier si le token de session existe
-  if (!sessionToken) {
+  if (!tokens) {
     return res.status(401).json({ error: "Token de session manquant" });
   }
 
   try {
-    const user = await db.User.findOne({ where: { sessionToken } });
+    const user = await db.User.findOne({ where: { Tokens: tokens } });
 
     // Vérifier si le token de session est valide
     if (!user) {
