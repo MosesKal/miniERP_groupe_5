@@ -25,7 +25,7 @@ const Sequelize = require("sequelize");
 const info = {
   revision: 1,
   name: "noname",
-  created: "2023-06-16T12:36:37.476Z",
+  created: "2023-06-17T08:35:12.146Z",
   comment: "",
 };
 
@@ -153,20 +153,33 @@ const migrationCommands = (transaction) => [
         prenom: { type: Sequelize.STRING, field: "prenom", allowNull: false },
         nom: { type: Sequelize.STRING, field: "nom", allowNull: false },
         role: {
-          type: Sequelize.ENUM("admin", "seler", "mining"),
+          type: Sequelize.ENUM("admin", "seller", "mining"),
           field: "role",
+          allowNull: false,
           defaultValue: "admin",
         },
-        email: { type: Sequelize.STRING, field: "email", allowNull: false },
+        email: {
+          type: Sequelize.STRING,
+          field: "email",
+          unique: true,
+          allowNull: false,
+        },
         telephone: {
           type: Sequelize.STRING,
           field: "telephone",
+          unique: true,
           allowNull: false,
         },
         password: {
           type: Sequelize.STRING,
           field: "password",
           allowNull: false,
+        },
+        Tokens: { type: Sequelize.STRING, field: "Tokens", allowNull: true },
+        StatusCompt: {
+          type: Sequelize.STRING,
+          field: "StatusCompt",
+          allowNull: true,
         },
         createdAt: {
           type: Sequelize.DATE,

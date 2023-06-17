@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const db = require("../models/");
 
-const authentication =(req, res, next) => {
+const authentication = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
@@ -18,4 +19,32 @@ const authentication =(req, res, next) => {
     res.send("Merci de vous authentifier");
   }
 };
-module.exports = authentication;
+
+const verifySessionToken = async (req, res, next) => {
+  const { tokens } = req.headers; // Récupérer le token de session depuis les headers de la requête 
+  
+
+  // Vérifier si le token de session existe
+  if (!tokens) {
+    return res.status(401).json({ error: "Token de session manquant" });
+  }
+
+  try {
+    const user = await db.User.findOne({ where: { Tokens: tokens } });
+
+    // Vérifier si le token de session est valide
+    if (!user) {
+      return res.status(401).json({ error: "Session invalide" });
+    }
+
+    // Le token de session est valide, ajouter l'utilisateur à l'objet de requête
+    req.user = user;
+
+    // Passer au middleware suivant
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
+module.exports = { authentication, verifySessionToken };

@@ -8,7 +8,7 @@ const {
 } = require("./../controllers/authController");
 
 /** middleware */
-const authentication = require("../middleware/authentication");
+const {verifySessionToken} = require("../middleware/authentication");
 
 /**express */
 const route = express.Router();
@@ -17,7 +17,7 @@ const route = express.Router();
 
 route.post("/login", PostLogin);
 
-route.post("/logout", authentication, PostLogout);
+route.post("/logout", verifySessionToken, PostLogout);
 
 route.post("/register", PostRegister);
 

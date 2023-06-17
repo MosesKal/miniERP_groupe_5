@@ -5,17 +5,27 @@ const bcrypt = require("bcryptjs");
 const PostLogin = async (req, res, next) => {
   let token;
   let roleUser;
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  email = email.trim();
+
   try {
     const user = await db.User.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error("Erreur, pas possible de se connecter!");
+      return res.status(401).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error("Erreur, pas possible de se connecter");
+      return res.status(401).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
 
     try {
@@ -24,14 +34,25 @@ const PostLogin = async (req, res, next) => {
         "secretkeyappearshere",
         { expiresIn: "1h" }
       );
+
+      // Sauvegarde du token dans la colonne "Tokens"
+      user.Tokens = token;
+      await user.save();
     } catch (err) {
-      throw new Error("Erreur, pas possible de se connecter");
+      return res.status(500).json({
+        success: false,
+        message: "Erreur, impossible de se connecter !",
+      });
     }
+
     roleUser = user.role;
   } catch (e) {
     console.log("Erreur lors de la connexion");
-    return res.status(400).send();
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur lors de la connexion" });
   }
+
   res.status(200).json({
     success: true,
     data: {
@@ -41,59 +62,59 @@ const PostLogin = async (req, res, next) => {
   });
 };
 
-const PostLogout = async (req, res, next) => {
-  async (req, res, next) => {
-    try {
-      re;
-    } catch (e) {}
-  };
+const PostLogout = async (req, res) => {
+  const { user } = req;
+  try {
+    user.Tokens = null;
+    await user.save();
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur lors de la déconnexion" });
+  }
 };
 
 const PostRegister = async (req, res, next) => {
-  let { email, password, prenom, nom, telephone } = req.body;
-  email = email.trim();
-  prenom = prenom.trim();
-  password = "abcd@ABCD1"
-  nom = nom.trim();
-  telephone = telephone.trim();
+  const { email, password, prenom, nom, telephone } = req.body;
 
-  const exists = await db.User.findOne({ where: { email: `${email}` } });
-
-  if (exists) {
-    res.send("Exist");
-    return;
-  }
-
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      console.error(err);
-      res.send("Error");
-      return;
+  try {
+    // Check if the email already exists
+    const userExists = await db.User.findOne({ where: { email: email } });
+    if (userExists) {
+      return res.status(400).json({
+        error: "Cet email est déjà utilisé par un autre utilisateur.",
+      });
     }
-    bcrypt.hash(`${password}`, salt, (err, hash) => {
-      if (err) {
-        console.error(err);
-        res.send("Error");
-        return;
-      }
 
-      db.User.create({
-        prenom: `${prenom}`,
-        nom: `${nom}`,
-        email: `${email}`,
-        telephone: `${telephone}`,
-        password: hash,
-      })
-        .then(() => {
-          console.log("Admin user created successfully.");
-          res.send("User created successfully");
-        })
-        .catch((err) => {
-          console.error("Failed to create admin user:", err);
-          res.send("Failed to create admin user");
-        });
+    // Generate the password hash
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create the user in the database
+    const newUser = await db.User.create({
+      prenom: prenom,
+      nom: nom,
+      email: email,
+      telephone: telephone,
+      password: hashedPassword,
+      statusCompt : process.env.STATUS_ATTENTE_VALIDATION
     });
-  });
+
+    res
+      .status(201)
+      .json({ message: "Utilisateur créé avec succès.", user: newUser });
+  } catch (error) {
+    if (error.name === "SequelizeValidationError") {
+      // Récupérer les erreurs de validation
+      const validationErrors = error.errors.map((err) => ({
+        field: err.path,
+        message: err.message,
+      }));
+
+      return res.status(400).json({ errors: validationErrors });
+    }
+
+    res.status(500).json({ error: "Échec de la création de l'utilisateur." });
+  }
 };
 
 const PostForgotPassword = async (req, res, next) => {};

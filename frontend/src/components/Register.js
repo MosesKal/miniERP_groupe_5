@@ -51,9 +51,6 @@ const Register = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-  // const [success, setSuccess] = useState(false);
-
-  /*** useEffect */
 
   useEffect(() => {
     prenomRef.current.focus();
@@ -258,15 +255,16 @@ const Register = () => {
           {/**----------------------------------------------------------------------- */}
 
           {/**------------------------------------------------------------------ */}
+
           <label htmlFor="email">
             Email :
             <FontAwesomeIcon
               icon={faCheck}
-              className={email ? "valid" : "hide"}
+              className={validemail ? "valid" : "hide"}
             />
             <FontAwesomeIcon
               icon={faTimes}
-              className={!email ? "hide" : "invalid"}
+              className={!validemail && email ? "invalid" : "hide"}
             />
           </label>
           <input
@@ -299,14 +297,14 @@ const Register = () => {
           {/**----------------------------------------------------------------------- */}
           {/**------------------------------------------------------------------ */}
           <label htmlFor="telephone">
-            Telephone :
+            Téléphone :
             <FontAwesomeIcon
               icon={faCheck}
-              className={telephone ? "valid" : "hide"}
+              className={validtelephone ? "valid" : "hide"}
             />
             <FontAwesomeIcon
               icon={faTimes}
-              className={validtelephone || !telephone ? "hide" : "invalid"}
+              className={!validtelephone && telephone ? "invalid" : "hide"}
             />
           </label>
           <input
@@ -421,7 +419,16 @@ const Register = () => {
                 ? true
                 : false
             }
-            className="btn-signin"
+            className={
+              !validPrenom ||
+              !validnom ||
+              !validemail ||
+              !validtelephone ||
+              !validPwd ||
+              !validMatch
+                ? "disabled"
+                : "btn-signin"
+            }
           >
             Créer
           </button>

@@ -2,21 +2,21 @@
   "development": {
     "username": "moses",
     "password": "moses",
-    "database": "miniErp",
+    "database": "erp_db",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "moses",
     "password": "moses",
-    "database": "miniErp",
+    "database": "erp_db",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "moses",
     "password": "moses",
-    "database": "miniErp",
+    "database": "erp_db",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

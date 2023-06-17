@@ -707,22 +707,35 @@
                     "defaultValue": {
                         "value": "admin"
                     },
+                    "allowNull": false,
                     "field": "role",
-                    "seqType": "Sequelize.ENUM('admin', 'seler', 'mining')"
+                    "seqType": "Sequelize.ENUM('admin', 'seller', 'mining')"
                 },
                 "email": {
                     "allowNull": false,
+                    "unique": true,
                     "field": "email",
                     "seqType": "Sequelize.STRING"
                 },
                 "telephone": {
                     "allowNull": false,
+                    "unique": true,
                     "field": "telephone",
                     "seqType": "Sequelize.STRING"
                 },
                 "password": {
                     "allowNull": false,
                     "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Tokens": {
+                    "allowNull": true,
+                    "field": "Tokens",
+                    "seqType": "Sequelize.STRING"
+                },
+                "StatusCompt": {
+                    "allowNull": true,
+                    "field": "StatusCompt",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
