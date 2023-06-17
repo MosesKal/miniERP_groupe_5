@@ -5,7 +5,6 @@ import Layout from "./components/Layout";
 import Missing from "./components/Missing";
 import Unauthorized from "./components/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
-import DashboardSeler from "./components/DashboardSeler";
 import DashboardMining from "./components/DashboardMining";
 import Accueil from "./components/pages/vendor/Accueil";
 import Comptabilite from "./components/pages/vendor/Comptabilite";
@@ -15,6 +14,7 @@ import PlanProduction from "./components/pages/vendor/PlanProduction";
 
 import { Routes, Route } from "react-router-dom";
 import Dash from "./components/Dash";
+import Attente from "./components/Attente";
 
 const ROLES = {
   MINING: "mining",
@@ -31,6 +31,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="attente" element={<Attente />} />
 
         {/* we want to protect these routes  */}
         <Route element={<RequireAuth allowedRoles={[ROLES.MINING]} />}>

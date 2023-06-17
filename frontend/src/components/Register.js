@@ -51,9 +51,6 @@ const Register = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-  // const [success, setSuccess] = useState(false);
-
-  /*** useEffect */
 
   useEffect(() => {
     prenomRef.current.focus();
@@ -422,7 +419,16 @@ const Register = () => {
                 ? true
                 : false
             }
-            className="btn-signin"
+            className={
+              !validPrenom ||
+              !validnom ||
+              !validemail ||
+              !validtelephone ||
+              !validPwd ||
+              !validMatch
+                ? "disabled"
+                : "btn-signin"
+            }
           >
             Créer
           </button>
