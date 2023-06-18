@@ -12,5 +12,8 @@ route.get("/profil", verifySessionToken, () => {
   const { user } = req;
   res.json({ user });
 });
-
+/** CREATE ENTREPRISE MINIERE */
+route.post('/registerMining', ()=>{
+  
+})
 module.exports = route;

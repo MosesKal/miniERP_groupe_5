@@ -8,7 +8,10 @@ const {
 } = require("./../controllers/authController");
 
 /** middleware */
-const {verifySessionToken, checkStatus} = require("../middleware/authentication");
+const {
+  verifySessionToken,
+  checkStatus,
+} = require("../middleware/authentication");
 
 /**express */
 
@@ -16,7 +19,7 @@ const route = express.Router();
 
 /**Routes */
 
-route.post("/login",checkStatus, PostLogin);
+route.post("/login", checkStatus, PostLogin);
 
 route.post("/logout", verifySessionToken, PostLogout);
 
