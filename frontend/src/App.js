@@ -18,7 +18,7 @@ import Attente from "./components/Attente";
 
 const ROLES = {
   MINING: "mining",
-  SELER: "seler",
+  SELER: "seller",
   ADMIN: "admin",
 };
 
@@ -43,12 +43,12 @@ const App = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.SELER]} />}>
-          <Route path="/seler" element={<Accueil/>} />
-          <Route path="/seler/dashboard" element={<Accueil />} />
-          <Route path="/seler/comptabilite" element={<Comptabilite />} />
-          <Route path="/seler/gestionCommande" element={<GestionCommande />} />
-          <Route path="/seler/gestionStock" element={<GestionStock />} />
-          <Route path="/seler/planProduction" element={<PlanProduction />} />
+          <Route path="/seller" element={<Accueil/>} />
+          <Route path="/seller/dashboard" element={<Accueil />} />
+          <Route path="/seller/comptabilite" element={<Comptabilite />} />
+          <Route path="/seller/gestionCommande" element={<GestionCommande />} />
+          <Route path="/seller/gestionStock" element={<GestionStock />} />
+          <Route path="/seller/planProduction" element={<PlanProduction />} />
         </Route>
 
         {/* catch all */}

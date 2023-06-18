@@ -23,7 +23,7 @@ const Navigation = () => {
       <div className="dash-sideBare-menu">
         <MenuList>
           <MenuItem>
-            <NavLink to="/seler">
+            <NavLink to="/seller">
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
                 <span className="dash-menu-name">Dashboard</span>
@@ -31,7 +31,7 @@ const Navigation = () => {
             </NavLink>
           </MenuItem>
           <MenuItem>
-            <NavLink to="/seler/comptabilite">
+            <NavLink to="/seller/comptabilite">
               <ListItemIcon>
                 <AccountBalanceWalletIcon fontSize="small" />
                 <span className="dash-menu-name">Comptabilite</span>
@@ -39,7 +39,7 @@ const Navigation = () => {
             </NavLink>
           </MenuItem>
           <MenuItem>
-            <NavLink to="/seler/gestionCommande">
+            <NavLink to="/seller/gestionCommande">
               <ListItemIcon>
                 <ListAltIcon Size="small" />
                 <span className="dash-menu-name">Commande</span>
@@ -48,7 +48,7 @@ const Navigation = () => {
           </MenuItem>
 
           <MenuItem>
-            <NavLink to="/seler/gestionStock">
+            <NavLink to="/seller/gestionStock">
               <ListItemIcon>
                 <ProductionQuantityLimitsIcon fontSize="small" />
                 <span className="dash-menu-name">Stock</span>
@@ -57,7 +57,7 @@ const Navigation = () => {
           </MenuItem>
 
           <MenuItem>
-            <NavLink to="/seler/planProduction">
+            <NavLink to="/seller/planProduction">
               <ListItemIcon>
                 <InventoryIcon fontSize="small" />
                 <span className="dash-menu-name">Plan de production</span>
@@ -66,7 +66,7 @@ const Navigation = () => {
           </MenuItem>
 
           <MenuItem>
-            <NavLink to="/seler/Cotation">
+            <NavLink to="/seller/Cotation">
               <ListItemIcon>
                 <AddShoppingCartIcon fontSize="small" />
                 <span className="dash-menu-name">Cotation</span>
@@ -82,7 +82,7 @@ const Navigation = () => {
         <div className="dash-sideBare-menu-param">
           <MenuList>
             <MenuItem>
-              <NavLink to="/seler">
+              <NavLink to="/seller">
                 <ListItemIcon>
                   <SettingsIcon fontSize="small" />
                   <span className="dash-menu-name">Parametre</span>

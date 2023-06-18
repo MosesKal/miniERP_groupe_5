@@ -38,7 +38,6 @@ const verifySessionToken = async (req, res, next) => {
     }
 
     // Le token de session est valide, ajouter l'utilisateur à l'objet de requête
-    req.user = user;
 
     // Passer au middleware suivant
     next();
@@ -47,4 +46,28 @@ const verifySessionToken = async (req, res, next) => {
   }
 };
 
-module.exports = { authentication, verifySessionToken };
+const checkStatus = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const userExists = await db.User.findOne({ where: { email: email } });
+    if (userExists) {
+      const status = userExists.StatusCompt;
+
+      if (status === process.env.STATUS_ATTENTE_VALIDATION) {
+        return res
+          .status(403)
+          .json({ message: "Votre compte est en cours de validation. Veuillez patienter." });
+      } else if (status === process.env.STATUS_REFUSE) {
+        return res.status(403).json({ message: "Votre inscription a été refusée." });
+      }
+    }
+
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Une erreur s'est produite lors de la vérification du statut du compte." });
+  }
+};
+
+module.exports = { authentication, verifySessionToken, checkStatus};

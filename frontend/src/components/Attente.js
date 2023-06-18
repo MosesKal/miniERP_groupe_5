@@ -7,14 +7,6 @@ import { Typography } from "@mui/material";
 const Attente = () => {
   return (
     <div className="register-containers">
-      {/* {success ? (
-        <section>
-          <h1>Success!</h1>
-          <p>
-            <Link to="/Login">Sign In</Link>
-          </p>
-        </section>
-      ) : ()} */}
       <section className="illustration-wrapper-register">
         <div className="logo">
           <Icon icon="icon-park-solid:blockchain" className="icon-logo" />
@@ -32,4 +24,5 @@ const Attente = () => {
     </div>
   );
 };
+
 export default Attente;

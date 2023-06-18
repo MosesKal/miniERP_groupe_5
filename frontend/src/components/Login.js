@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import imgIllustration from "../assets/Illustration.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,8 +13,6 @@ const LOGIN_URL = "/login";
 const Login = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef();
   const errRef = useRef();
@@ -42,19 +40,18 @@ const Login = () => {
         JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true
         }
       );
 
+      console.log(response.data.data);
       const accessToken = response?.data?.data?.accessToken;
       const roles = response?.data?.data?.roles;
 
       setAuth({ roles, accessToken });
       setUser("");
       setPwd("");
-      // navigate(from, { replace: true });
+
       navigate(`/${roles}`);
-      console.log(roles);
     } catch (err) {
       if (!err?.response) {
         setErrMsg(
@@ -86,6 +83,16 @@ const Login = () => {
             Unauthorized
           </>
         );
+      } else if (err.response?.status === 403) {
+        setErrMsg(
+          <>
+            <FontAwesomeIcon
+              icon={faExclamationCircle}
+              className="warning-icon"
+            />{" "}
+            {err.response.data.message}
+          </>
+        );
       } else {
         setErrMsg(
           <>
@@ -97,12 +104,13 @@ const Login = () => {
           </>
         );
       }
-
+      console.log(err);
       errRef.current.focus();
     }
   };
 
   const label = { inputProps: { "aria-label": "Switch demo" } };
+
   return (
     <div className="login-Containers">
       <section className="illustration-wrapper">
@@ -114,7 +122,6 @@ const Login = () => {
           <img src={imgIllustration} alt="Logo" />
         </div>
       </section>
-
       <section className="login-form-container">
         <p
           ref={errRef}
