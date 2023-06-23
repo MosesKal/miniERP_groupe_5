@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const {
   PostLogin,
   PostLogout,
@@ -17,13 +18,15 @@ const {
 
 const route = express.Router();
 
+const upload = multer({dest : 'uploads'});
+
 /**Routes */
 
 route.post("/login", checkStatus, PostLogin);
 
 route.post("/logout", verifySessionToken, PostLogout);
 
-route.post("/register", PostRegister);
+route.post("/register", upload.single('profil'),PostRegister);
 
 route.post("/forgotPassword", PostForgotPassword);
 

@@ -1,19 +1,13 @@
 const express = require("express");
-
-/** middleware */
-const { verifySessionToken } = require("../middleware/authentication");
+const { PostRegisterMining } = require("./../controllers/adminController");
 
 /**express */
 const route = express.Router();
 
 /**Routes */
 
-route.get("/profil", verifySessionToken, () => {
-  const { user } = req;
-  res.json({ user });
-});
-/** CREATE ENTREPRISE MINIERE */
-route.post('/registerMining', ()=>{
-  
-})
+// route.get("/profil", );
+
+route.post("/registerMining", PostRegisterMining);
+
 module.exports = route;

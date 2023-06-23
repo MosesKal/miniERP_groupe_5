@@ -1,6 +1,7 @@
 const db = require("../models/");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const transporter = require("../mailConfig");
 
 const PostLogin = async (req, res, next) => {
   let token;
@@ -74,11 +75,9 @@ const PostLogout = async (req, res) => {
 };
 
 const PostRegister = async (req, res, next) => {
-  const { email, password, prenom, nom, telephone } = req.body;
-  console.log("------------" + password);
+  const { email, password, prenom, nom, telephone, typeUser} = req.body;
 
   try {
-    // Check if the email already exists
     const userExists = await db.User.findOne({ where: { email: email } });
     if (userExists) {
       return res.status(400).json({
@@ -86,24 +85,62 @@ const PostRegister = async (req, res, next) => {
       });
     }
 
-    // Generate the password hash
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create the user in the database
     const newUser = await db.User.create({
       prenom: prenom,
       nom: nom,
       email: email,
       telephone: telephone,
       password: hashedPassword,
-      // StatusCompt: 1,
       StatusCompt: process.env.STATUS_ATTENTE_VALIDATION,
-
     });
+
+    const imageFile = req.file;
+    console.log(req.file);
+    if (imageFile) {
+      newUser.Profile = `http://localhost:2000/uploads/${imageFile.filename}`;
+      try {
+        await newUser.save();
+        console.log(imageFile);
+      } catch (error) {
+        console.log(
+          "Erreur lors de la sauvegarde de l'URL de l'image :",
+          error
+        );
+      }
+    }
+
     res
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
+
+    // Envoi de la notification par e-mail à l'administrateur
+
+    // Envoi de la notification par e-mail à l'administrateur
+    transporter.sendMail(
+      {
+        from: email,
+        to: email,
+        subject: "Nouvelle inscription",
+        text: "Un nouvel utilisateur s'est inscrit. Veuillez valider son compte.",
+      },
+      (error, info) => {
+        if (error) {
+          console.log("Erreur lors de l'envoi de l'e-mail :", error);
+          // Gérer l'erreur d'envoi de l'e-mail ici
+        } else {
+          console.log("E-mail envoyé avec succès:", info.response);
+          // Traiter le succès de l'envoi de l'e-mail ici
+        }
+      }
+    );
+
+    const io = req.app.get("socketio");
+    io.emit("newUserRegistration", { user: newUser });
+
+    //....
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
       // Récupérer les erreurs de validation
