@@ -1,10 +1,15 @@
 const db = require("../models/");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const transporter = require("../mailConfig");
 
 const PostLogin = async (req, res, next) => {
   let token;
   let roleUser;
+  let prenom;
+  let profile;
+  let nom;
+
   let { email, password } = req.body;
 
   email = email.trim();
@@ -35,7 +40,6 @@ const PostLogin = async (req, res, next) => {
         { expiresIn: "1h" }
       );
 
-      // Sauvegarde du token dans la colonne "Tokens"
       user.Tokens = token;
       await user.save();
     } catch (err) {
@@ -44,8 +48,10 @@ const PostLogin = async (req, res, next) => {
         message: "Erreur, impossible de se connecter !",
       });
     }
-
     roleUser = user.role;
+    prenom = user.prenom;
+    nom = user.nom;
+    profile = user.Profile;
   } catch (e) {
     console.log("Erreur lors de la connexion");
     return res
@@ -58,6 +64,9 @@ const PostLogin = async (req, res, next) => {
     data: {
       roles: roleUser,
       accessToken: token,
+      nomUser: nom,
+      prenomUser: prenom,
+      profileUser: profile,
     },
   });
 };
@@ -74,39 +83,72 @@ const PostLogout = async (req, res) => {
 };
 
 const PostRegister = async (req, res, next) => {
-  const { email, password, prenom, nom, telephone } = req.body;
-  console.log("------------" + password);
+  const imageFile = `${req.protocol}://${req.get("host")}/uploads/${
+    req.file.filename
+  }`;
+  console.log(req.file);
+
+  const { email, password, prenom, nom, telephone, typeUser } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "L'email est requis." });
+  }
 
   try {
-    // Check if the email already exists
-    const userExists = await db.User.findOne({ where: { email: email } });
+    const userExists = await db.User.findOne({ where: { email } });
     if (userExists) {
       return res.status(400).json({
         error: "Cet email est déjà utilisé par un autre utilisateur.",
       });
     }
-
-    // Generate the password hash
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create the user in the database
     const newUser = await db.User.create({
       prenom: prenom,
       nom: nom,
       email: email,
       telephone: telephone,
       password: hashedPassword,
-      // StatusCompt: 1,
       StatusCompt: process.env.STATUS_ATTENTE_VALIDATION,
-
+      Profile: imageFile,
     });
+
+    if (!newUser) {
+      return res
+        .status(500)
+        .json({ error: "Échec de la création de l'utilisateur." });
+    }
+
     res
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
+
+    // Envoi de la notification par e-mail à l'administrateur
+    transporter.sendMail(
+      {
+        from: email,
+        to: email,
+        subject: "Nouvelle inscription",
+        text: "Un nouvel utilisateur s'est inscrit. Veuillez valider son compte.",
+      },
+      (error, info) => {
+        if (error) {
+          console.log("Erreur lors de l'envoi de l'e-mail :", error);
+          // Gérer l'erreur d'envoi de l'e-mail ici
+        } else {
+          console.log("E-mail envoyé avec succès:", info.response);
+          // Traiter le succès de l'envoi de l'e-mail ici
+        }
+      }
+    );
+
+    const io = req.app.get("socketio");
+    io.emit("newUserRegistration", { user: newUser });
+
+    //....
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
-      // Récupérer les erreurs de validation
       const validationErrors = error.errors.map((err) => ({
         field: err.path,
         message: err.message,
@@ -115,7 +157,7 @@ const PostRegister = async (req, res, next) => {
       return res.status(400).json({ errors: validationErrors });
     }
     console.log(error);
-    res.status(500).json({ error: "Échec de la création de l'utilisateur!!." });
+    res.status(500).json({ error: "Échec de la création de l'utilisateur." });
   }
 };
 

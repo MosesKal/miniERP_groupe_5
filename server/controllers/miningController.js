@@ -1,44 +1,50 @@
-const PostRegisterMining = async (req, res, next) => {
-    const { nomEntreprise, description, logoEntreprise} = req.body;
-  
-    try {
+const { Cotations, User, Produits, Offres } = require('../models'); // Assurez-vous d'importer correctement vos modèles
 
-      const userExists = await db.User.findOne({ where: { email: email } });
-      if (userExists) {
-        return res.status(400).json({
-          error: "Cet email est déjà utilisé par un autre utilisateur.",
-        });
-      }
+const createCotation = async (req, res, next) => {
+  const { description, status, duree_de_validation, userId } = req.body;
 
-      // Generate the password hash
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
+  try {
 
-      // Create the user in the database
-      const newUser = await db.User.create({
-        prenom: prenom,
-        nom: nom,
-        email: email,
-        telephone: telephone,
-        password: hashedPassword,
-        // StatusCompt: 1,
-        StatusCompt: process.env.STATUS_ATTENTE_VALIDATION,
-  
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({
+        error: 'Utilisateur non trouvé.',
       });
-      res
-        .status(201)
-        .json({ message: "Utilisateur créé avec succès.", user: newUser });
-    } catch (error) {
-      if (error.name === "SequelizeValidationError") {
-        // Récupérer les erreurs de validation
-        const validationErrors = error.errors.map((err) => ({
-          field: err.path,
-          message: err.message,
-        }));
-  
-        return res.status(400).json({ errors: validationErrors });
-      }
-      console.log(error);
-      res.status(500).json({ error: "Échec de la création de l'utilisateur!!." });
     }
-  };
+
+    const currentDate = new Date();
+
+
+    const cotation = await Cotations.create({
+      date: currentDate.toISOString(), 
+      description,
+      status,
+      duree_de_validation,
+      userId,
+    });
+
+
+    const produit = await Produits.findByPk(1); 
+    if (produit) {
+      await cotation.addProduit(produit);
+    }
+
+
+    const offre = await Offres.create({ /* ... */ }); 
+    if (offre) {
+      await cotation.setOffre(offre);
+    }
+
+    res.status(200).json({
+      message: 'Cotation enregistrée avec succès.',
+      cotation,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Une erreur est survenue lors de l'enregistrement de la cotation.",
+    });
+  }
+};
+
+module.exports = { createCotation };

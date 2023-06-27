@@ -15,8 +15,6 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PHONE_REGEX = /^(\+243|0)[1-9]\d{8}$/;
 
-// cont TEL_REGEX
-
 const REGISTER_URL = "/register";
 
 const Register = () => {
@@ -106,7 +104,6 @@ const Register = () => {
     const v3 = EMAIL_REGEX.test(email);
     const v4 = PHONE_REGEX.test(telephone);
     const v5 = PWD_REGEX.test(pwd);
-    
 
     if (!v1 || !v5 || !v2 || !v3 || !v4) {
       setErrMsg("Invalid Entry");
@@ -130,13 +127,10 @@ const Register = () => {
       setMatchPwd("");
       navigate("/attente");
     } catch (err) {
-      console.log(err);
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 409) {
-        setErrMsg("Username Taken");
-      } else {
-        setErrMsg("Registration Failed");
+      if (err.response?.status === 500) {
+        setErrMsg(err.response.data.errors[0].message);
+      } else if (err.response?.status == 400) {
+        setErrMsg(err.response.data.errors[0].message);
       }
       errRef.current.focus();
     }
