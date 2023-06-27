@@ -1,5 +1,6 @@
 const express = require("express");
-const multer = require("multer");
+const path = require("path");
+const multer = require("../middleware/multer");
 const {
   PostLogin,
   PostLogout,
@@ -14,22 +15,21 @@ const {
   checkStatus,
 } = require("../middleware/authentication");
 
-/**express */
+/** express */
+const router = express.Router();
 
-const route = express.Router();
+/** Routes */
 
-const upload = multer({dest : 'uploads'});
+router.post("/login", checkStatus, PostLogin);
 
-/**Routes */
+router.post("/logout", verifySessionToken, PostLogout);
 
-route.post("/login", checkStatus, PostLogin);
+router.post("/register", multer, PostRegister);
 
-route.post("/logout", verifySessionToken, PostLogout);
+router.post("/forgotPassword", PostForgotPassword);
 
-route.post("/register", upload.single('profil'),PostRegister);
+router.post("/resetPassword", PostResetPassword);
 
-route.post("/forgotPassword", PostForgotPassword);
+router.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-route.post("/resetPassword", PostResetPassword);
-
-module.exports = route;
+module.exports = router;

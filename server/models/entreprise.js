@@ -14,11 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       logoEntreprise: DataTypes.STRING,
       denomination: DataTypes.STRING,
-      descriptionEntreprise: DataTypes.STRING,
+      formeJuridique: DataTypes.STRING,
+      Description : DataTypes.STRING
     },
     {
       sequelize,
       modelName: "Entreprise",
+
     }
   );
   return Entreprise;

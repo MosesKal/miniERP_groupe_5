@@ -1,5 +1,5 @@
 const express = require("express");
-const { } = require("./../controllers/miningController");
+const {} = require("./../controllers/miningController");
 
 /**controlleurs */
 
@@ -7,8 +7,9 @@ const { } = require("./../controllers/miningController");
 
 const route = express.Router();
 
-/**Routes  profil utilisateur*/
+/**fichiers statiques */
 
+/**Routes  profil utilisateur*/
 
 route.get("/profil", verifySessionToken, () => {
   const { user } = req;

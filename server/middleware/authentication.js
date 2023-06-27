@@ -21,8 +21,7 @@ const authentication = (req, res, next) => {
 };
 
 const verifySessionToken = async (req, res, next) => {
-  const { tokens } = req.headers; // Récupérer le token de session depuis les headers de la requête 
-  
+  const { tokens } = req.headers; // Récupérer le token de session depuis les headers de la requête
 
   // Vérifier si le token de session existe
   if (!tokens) {
@@ -57,17 +56,27 @@ const checkStatus = async (req, res, next) => {
       if (status === process.env.STATUS_ATTENTE_VALIDATION) {
         return res
           .status(403)
-          .json({ message: "Votre compte est en cours de validation. Veuillez patienter." });
+          .json({
+            message:
+              "Votre compte est en cours de validation. Veuillez patienter.",
+          });
       } else if (status === process.env.STATUS_REFUSE) {
-        return res.status(403).json({ message: "Votre inscription a été refusée." });
+        return res
+          .status(403)
+          .json({ message: "Votre inscription a été refusée." });
       }
     }
 
     next();
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Une erreur s'est produite lors de la vérification du statut du compte." });
+    res
+      .status(500)
+      .json({
+        error:
+          "Une erreur s'est produite lors de la vérification du statut du compte.",
+      });
   }
 };
 
-module.exports = { authentication, verifySessionToken, checkStatus};
+module.exports = { authentication, verifySessionToken, checkStatus };

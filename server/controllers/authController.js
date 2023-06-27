@@ -6,6 +6,10 @@ const transporter = require("../mailConfig");
 const PostLogin = async (req, res, next) => {
   let token;
   let roleUser;
+  let prenom;
+  let profile;
+  let nom;
+
   let { email, password } = req.body;
 
   email = email.trim();
@@ -36,7 +40,6 @@ const PostLogin = async (req, res, next) => {
         { expiresIn: "1h" }
       );
 
-      // Sauvegarde du token dans la colonne "Tokens"
       user.Tokens = token;
       await user.save();
     } catch (err) {
@@ -45,8 +48,10 @@ const PostLogin = async (req, res, next) => {
         message: "Erreur, impossible de se connecter !",
       });
     }
-
     roleUser = user.role;
+    prenom = user.prenom;
+    nom = user.nom;
+    profile = user.Profile;
   } catch (e) {
     console.log("Erreur lors de la connexion");
     return res
@@ -59,6 +64,9 @@ const PostLogin = async (req, res, next) => {
     data: {
       roles: roleUser,
       accessToken: token,
+      nomUser: nom,
+      prenomUser: prenom,
+      profileUser: profile,
     },
   });
 };
@@ -75,16 +83,24 @@ const PostLogout = async (req, res) => {
 };
 
 const PostRegister = async (req, res, next) => {
-  const { email, password, prenom, nom, telephone, typeUser} = req.body;
+  const imageFile = `${req.protocol}://${req.get("host")}/uploads/${
+    req.file.filename
+  }`;
+  console.log(req.file);
+
+  const { email, password, prenom, nom, telephone, typeUser } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "L'email est requis." });
+  }
 
   try {
-    const userExists = await db.User.findOne({ where: { email: email } });
+    const userExists = await db.User.findOne({ where: { email } });
     if (userExists) {
       return res.status(400).json({
         error: "Cet email est déjà utilisé par un autre utilisateur.",
       });
     }
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -95,28 +111,18 @@ const PostRegister = async (req, res, next) => {
       telephone: telephone,
       password: hashedPassword,
       StatusCompt: process.env.STATUS_ATTENTE_VALIDATION,
+      Profile: imageFile,
     });
 
-    const imageFile = req.file;
-    console.log(req.file);
-    if (imageFile) {
-      newUser.Profile = `http://localhost:2000/uploads/${imageFile.filename}`;
-      try {
-        await newUser.save();
-        console.log(imageFile);
-      } catch (error) {
-        console.log(
-          "Erreur lors de la sauvegarde de l'URL de l'image :",
-          error
-        );
-      }
+    if (!newUser) {
+      return res
+        .status(500)
+        .json({ error: "Échec de la création de l'utilisateur." });
     }
 
     res
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
-
-    // Envoi de la notification par e-mail à l'administrateur
 
     // Envoi de la notification par e-mail à l'administrateur
     transporter.sendMail(
@@ -143,7 +149,6 @@ const PostRegister = async (req, res, next) => {
     //....
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
-      // Récupérer les erreurs de validation
       const validationErrors = error.errors.map((err) => ({
         field: err.path,
         message: err.message,
@@ -152,7 +157,7 @@ const PostRegister = async (req, res, next) => {
       return res.status(400).json({ errors: validationErrors });
     }
     console.log(error);
-    res.status(500).json({ error: "Échec de la création de l'utilisateur!!." });
+    res.status(500).json({ error: "Échec de la création de l'utilisateur." });
   }
 };
 
