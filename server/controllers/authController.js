@@ -83,12 +83,16 @@ const PostLogout = async (req, res) => {
 };
 
 const PostRegister = async (req, res, next) => {
+  if (!req.file) {
+    return res
+      .status(400)
+      .json({ error: "Aucun fichier n'a été inclus dans la requête." });
+  }
   const imageFile = `${req.protocol}://${req.get("host")}/uploads/${
     req.file.filename
   }`;
-  console.log(req.file);
 
-  const { email, password, prenom, nom, telephone, typeUser } = req.body;
+  const { email, password, prenom, nom, telephone } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: "L'email est requis." });
@@ -135,7 +139,7 @@ const PostRegister = async (req, res, next) => {
       (error, info) => {
         if (error) {
           console.log("Erreur lors de l'envoi de l'e-mail :", error);
-          // Gérer l'erreur d'envoi de l'e-mail ici
+          
         } else {
           console.log("E-mail envoyé avec succès:", info.response);
           // Traiter le succès de l'envoi de l'e-mail ici
