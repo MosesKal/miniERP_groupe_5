@@ -421,12 +421,16 @@
                     "field": "logoEntreprise",
                     "seqType": "Sequelize.STRING"
                 },
-                "nomEntreprise": {
-                    "field": "nomEntreprise",
+                "denomination": {
+                    "field": "denomination",
                     "seqType": "Sequelize.STRING"
                 },
-                "descriptionEntreprise": {
-                    "field": "descriptionEntreprise",
+                "formeJuridique": {
+                    "field": "formeJuridique",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Description": {
+                    "field": "Description",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -736,6 +740,11 @@
                 "StatusCompt": {
                     "allowNull": true,
                     "field": "StatusCompt",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Profile": {
+                    "allowNull": true,
+                    "field": "Profile",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {

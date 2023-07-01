@@ -25,7 +25,7 @@ const Sequelize = require("sequelize");
 const info = {
   revision: 1,
   name: "noname",
-  created: "2023-06-17T08:35:12.146Z",
+  created: "2023-06-28T19:16:39.538Z",
   comment: "",
 };
 
@@ -74,11 +74,9 @@ const migrationCommands = (transaction) => [
           allowNull: false,
         },
         logoEntreprise: { type: Sequelize.STRING, field: "logoEntreprise" },
-        nomEntreprise: { type: Sequelize.STRING, field: "nomEntreprise" },
-        descriptionEntreprise: {
-          type: Sequelize.STRING,
-          field: "descriptionEntreprise",
-        },
+        denomination: { type: Sequelize.STRING, field: "denomination" },
+        formeJuridique: { type: Sequelize.STRING, field: "formeJuridique" },
+        Description: { type: Sequelize.STRING, field: "Description" },
         createdAt: {
           type: Sequelize.DATE,
           field: "createdAt",
@@ -181,6 +179,7 @@ const migrationCommands = (transaction) => [
           field: "StatusCompt",
           allowNull: true,
         },
+        Profile: { type: Sequelize.STRING, field: "Profile", allowNull: true },
         createdAt: {
           type: Sequelize.DATE,
           field: "createdAt",
