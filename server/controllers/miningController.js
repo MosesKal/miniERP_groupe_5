@@ -1,10 +1,12 @@
 const db = require("../models/"); // Assurez-vous d'importer correctement vos modèles
 
 const createCotation = async (req, res, next) => {
-  const { description, status, duree_de_validation, userId } = req.body;
+  const cotation = req.body;
+
+  console.log(cotation);
 
   try {
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(cotation.userid);
     if (!user) {
       return res.status(404).json({
         error: "Utilisateur non trouvé.",
@@ -21,13 +23,12 @@ const createCotation = async (req, res, next) => {
       userId,
     });
 
-    const produit = await Produits.findByPk(1);
+    const produit = await db.Produits.findByPk(1);
     if (produit) {
       await cotation.addProduit(produit);
     }
-    
 
-    const offre = await Offres.create({
+    const offre = await db.Offres.create({
       /* ... */
     });
     if (offre) {

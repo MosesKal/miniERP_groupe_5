@@ -19,7 +19,7 @@ app.use(cors());
 
 /** fichiers statiques */
 app.use(express.static("uploads"));
-/** */
+
 
 app.use(express.json());
 

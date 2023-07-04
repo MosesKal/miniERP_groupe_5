@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Cotations.init(
     {
-      date: DataTypes.STRING,
+      date_debut: DataTypes.STRING,
+      date_fin: DataTypes.STRING,
       description: DataTypes.STRING,
       status: DataTypes.STRING,
       duree_de_validation: DataTypes.STRING,

@@ -95,7 +95,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      Profile : {
+      Profile: {
         type: DataTypes.STRING,
         allowNull: true,
       },
