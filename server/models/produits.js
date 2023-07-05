@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       date: DataTypes.STRING,
       statut: DataTypes.STRING,
       photo: DataTypes.TEXT,
-      categorieId: DataTypes.INTEGER, // Ajoutez la colonne pour la clé étrangère
+      categorieId: DataTypes.INTEGER,
     },
     {
       sequelize,
