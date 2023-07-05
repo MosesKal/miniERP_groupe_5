@@ -9,7 +9,7 @@ const MINE_TYPE = {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "imagesProduits");
+    callback(null, "images");
   },
   filename: (req, file, callback) => {
     const name = file.originalname.split(" ").join("_");
@@ -20,4 +20,4 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-module.exports = upload.single("photoProduit");
+module.exports = upload.single("logo");

@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const auth = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const vendeurRoutes = require("./routes/seler");
@@ -13,13 +14,14 @@ const socketIo = require("socket.io");
 const server = http.createServer(app);
 const io = socketIo(server);
 
+app.use(morgan("dev"));
+
 app.set("socketio", io);
 
 app.use(cors());
 
 /** fichiers statiques */
 app.use(express.static("uploads"));
-
 
 app.use(express.json());
 

@@ -1,51 +1,11 @@
 const db = require("../models/"); // Assurez-vous d'importer correctement vos modèles
 
 const createCotation = async (req, res, next) => {
-  const cotation = req.body;
+  const {startDate,description, duree, userId} = req.body;
+  const {produits} = req.body;
 
-  console.log(cotation);
+  console.log(produits);
 
-  try {
-    const user = await User.findByPk(cotation.userid);
-    if (!user) {
-      return res.status(404).json({
-        error: "Utilisateur non trouvé.",
-      });
-    }
-
-    const currentDate = new Date();
-
-    const cotation = await Cotations.create({
-      date: currentDate.toISOString(),
-      description,
-      status,
-      duree_de_validation,
-      userId,
-    });
-
-    const produit = await db.Produits.findByPk(1);
-    if (produit) {
-      await cotation.addProduit(produit);
-    }
-
-    const offre = await db.Offres.create({
-      /* ... */
-    });
-    if (offre) {
-      await cotation.setOffre(offre);
-    }
-
-    res.status(200).json({
-      message: "Cotation enregistrée avec succès.",
-      cotation,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message:
-        "Une erreur est survenue lors de l'enregistrement de la cotation.",
-    });
-  }
 };
 
 const getDataMining = async (req, res) => {
