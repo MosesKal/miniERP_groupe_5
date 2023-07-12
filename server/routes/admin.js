@@ -6,7 +6,6 @@ const {
 const path = require("path");
 const uploadImage = require("../middleware/uploadImage");
 
-
 const route = express.Router();
 
 
