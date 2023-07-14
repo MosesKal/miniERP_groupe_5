@@ -48,7 +48,7 @@ const PostRegisterMining = async (req, res) => {
   }
 };
 
-const createAddress = async (req, res, next) => {
+const createAddress = async (req, res) => {
   const { province, ville, avenue, entrepriseId } = req.body;
   try {
     const addressExist = await db.Adresse.findOne({ where: { entrepriseId } });
@@ -81,4 +81,5 @@ const createAddress = async (req, res, next) => {
     }
   }
 };
+
 module.exports = { PostRegisterMining, createAddress };

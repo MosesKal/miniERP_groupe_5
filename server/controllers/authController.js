@@ -9,6 +9,8 @@ const PostLogin = async (req, res, next) => {
   let prenom;
   let profile;
   let nom;
+  let mail;
+  let telephone;
 
   let { email, password } = req.body;
 
@@ -52,6 +54,8 @@ const PostLogin = async (req, res, next) => {
     prenom = user.prenom;
     nom = user.nom;
     profile = user.Profile;
+    mail = user.email;
+    telephone = user.telephone;
   } catch (e) {
     console.log("Erreur lors de la connexion");
     return res
@@ -67,6 +71,8 @@ const PostLogin = async (req, res, next) => {
       nomUser: nom,
       prenomUser: prenom,
       profileUser: profile,
+      telephone,
+      mail
     },
   });
 };
