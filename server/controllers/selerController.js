@@ -95,4 +95,123 @@ const createCategorie = async (req, res) => {
   }
 };
 
-module.exports = { createProduct, createCategorie };
+const getCotationDetails = async (req, res) => {
+  try {
+    const cotationId = req.params.cotationId;
+
+    const cotation = await db.Cotations.findOne({
+      where: { id: cotationId },
+      include: [
+        {
+          model: db.User,
+          include: [{ model: db.Entreprise, attributes: ['denomination', 'logoEntreprise', 'formeJuridique', 'Description'] }],
+          attributes: ['email', 'telephone'],
+        },
+        {
+          model: db.Produits,
+          include: { model: db.categorie_produits, attributes: ['nom_categorie', 'illustration_categorie'] },
+        },
+      ],
+    });
+
+    if (!cotation) {
+      return res.status(404).json({ error: "Cotation introuvable." });
+    }
+
+    const {
+      date_debut,
+      date_fin,
+      duree_de_validation,
+      description,
+      User: { email, telephone, Entreprise },
+      Produits,
+    } = cotation;
+
+    const cotationDetails = {
+      email,
+      telephone,
+      entreprise: Entreprise.denomination,
+      logoEntreprise: Entreprise.logoEntreprise,
+      descriptionEntreprise: Entreprise.Description,
+      formeJuridique: Entreprise.formeJuridique,
+      date_debut,
+      date_fin,
+      duree_de_validation,
+      description,
+      produits: Produits.map((produit) => ({
+        ...produit.toJSON(),
+        nom_categorie: produit.categorie_produit.nom_categorie,
+        illustration_categorie: produit.categorie_produit.illustration_categorie,
+      })),
+    };
+
+    res.status(200).json(cotationDetails);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erreur lors de la récupération des informations de la cotation." });
+  }
+};
+
+const getAllCotations = async (req, res) => {
+  try {
+    const cotations = await db.Cotations.findAll({
+      include: [
+        {
+          model: db.User,
+          include: [
+            {
+              model: db.Entreprise,
+              attributes: ['denomination', 'logoEntreprise', 'formeJuridique', 'Description'],
+            },
+          ],
+          attributes: ['email', 'telephone'],
+        },
+        {
+          model: db.Produits,
+          include: { model: db.categorie_produits, attributes: ['nom_categorie', 'illustration_categorie'] },
+        },
+      ],
+    });
+
+    const cotationDetailsList = cotations.map((cotation) => {
+      const {
+        id,
+        date_debut,
+        date_fin,
+        duree_de_validation,
+        description,
+        User: { email, telephone, Entreprise },
+        Produits,
+      } = cotation;
+
+      const cotationDetails = {
+        id,
+        email,
+        telephone,
+        entreprise: Entreprise.denomination,
+        logoEntreprise: Entreprise.logoEntreprise,
+        descriptionEntreprise: Entreprise.Description,
+        formeJuridique: Entreprise.formeJuridique,
+        date_debut,
+        date_fin,
+        duree_de_validation,
+        description,
+        produits: Produits.map((produit) => ({
+          ...produit.toJSON(),
+          nom_categorie: produit.categorie_produit.nom_categorie,
+          illustration_categorie: produit.categorie_produit.illustration_categorie,
+        })),
+      };
+
+      return cotationDetails;
+    });
+
+    res.status(200).json(cotationDetailsList);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erreur lors de la récupération des cotations." });
+  }
+};
+
+
+module.exports = { createProduct, createCategorie, getCotationDetails, getAllCotations };

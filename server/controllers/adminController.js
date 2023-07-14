@@ -1,6 +1,6 @@
 const db = require("../models/");
 
-const PostRegisterMining = async (req, res, next) => {
+const PostRegisterMining = async (req, res) => {
   if (!req.file) {
     return res
       .status(400)
@@ -81,5 +81,4 @@ const createAddress = async (req, res, next) => {
     }
   }
 };
-
 module.exports = { PostRegisterMining, createAddress };

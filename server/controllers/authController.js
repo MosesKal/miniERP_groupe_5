@@ -88,6 +88,7 @@ const PostRegister = async (req, res, next) => {
       .status(400)
       .json({ error: "Aucun fichier n'a été inclus dans la requête." });
   }
+
   const imageFile = `${req.protocol}://${req.get("host")}/uploads/${
     req.file.filename
   }`;
@@ -128,7 +129,6 @@ const PostRegister = async (req, res, next) => {
       .status(201)
       .json({ message: "Utilisateur créé avec succès.", user: newUser });
 
-    // Envoi de la notification par e-mail à l'administrateur
     transporter.sendMail(
       {
         from: email,
@@ -142,7 +142,6 @@ const PostRegister = async (req, res, next) => {
           
         } else {
           console.log("E-mail envoyé avec succès:", info.response);
-          // Traiter le succès de l'envoi de l'e-mail ici
         }
       }
     );
@@ -150,7 +149,6 @@ const PostRegister = async (req, res, next) => {
     const io = req.app.get("socketio");
     io.emit("newUserRegistration", { user: newUser });
 
-    //....
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
       const validationErrors = error.errors.map((err) => ({

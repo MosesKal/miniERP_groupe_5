@@ -4,17 +4,21 @@ const uploadImageProduit = require("../middleware/uploadImageProduit");
 const {
   createProduct,
   createCategorie,
+  getCotationDetails,
+  getAllCotations
 } = require("./../controllers/selerController");
 
-/** middleware */
 
 
 const route = express.Router();
 route.post("/createProduct", uploadImageProduit, createProduct);
 route.post("/createCategorie", uploadImageProduit, createCategorie);
+route.get("/getCotation/:cotationId", getCotationDetails);
+route.get("/getAllCatations", getAllCotations);
+
 route.use(
-  "/imagesProduits",
-  express.static(path.join(__dirname, "../imagesProduits"))
+  "/imagesProduct",
+  express.static(path.join(__dirname, "../imagesProduct"))
 );
 
 module.exports = route;
