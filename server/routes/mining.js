@@ -8,9 +8,7 @@ const {
 const router = express.Router();
 
 router.get("/getDataMining/:token", getDataMining);
-
 router.post("/createCotation", createCotation);
-
 router.get("/getProduits", getProduits);
 
 module.exports = router;

@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.depenses);
       User.belongsTo(models.Entreprise, {
         foreignKey: "entrepriseId",
-        // as: "entreprise", // Utiliser le même alias que dans le modèle Entreprise
       });
     }
   }

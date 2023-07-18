@@ -15,9 +15,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(morgan("dev"));
-
 app.set("socketio", io);
-
 app.use(cors());
 
 /** fichiers statiques */

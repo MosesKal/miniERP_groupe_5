@@ -5,16 +5,21 @@ const {
   createProduct,
   createCategorie,
   getCotationDetails,
-  getAllCotations
+  getAllCotations,
+  addStock,
+  getAllStocksByUser
 } = require("./../controllers/selerController");
-
-
 
 const route = express.Router();
 route.post("/createProduct", uploadImageProduit, createProduct);
 route.post("/createCategorie", uploadImageProduit, createCategorie);
 route.get("/getCotation/:cotationId", getCotationDetails);
-route.get("/getAllCatations", getAllCotations);
+route.get("/getAllCotations", getAllCotations);
+
+//Stock
+
+route.post("/addStock", addStock);
+route.get("/getAllStocksByUser/:userId", getAllStocksByUser);
 
 route.use(
   "/imagesProduct",

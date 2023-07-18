@@ -72,7 +72,7 @@ const PostLogin = async (req, res, next) => {
       prenomUser: prenom,
       profileUser: profile,
       telephone,
-      mail
+      mail,
     },
   });
 };
@@ -145,7 +145,6 @@ const PostRegister = async (req, res, next) => {
       (error, info) => {
         if (error) {
           console.log("Erreur lors de l'envoi de l'e-mail :", error);
-          
         } else {
           console.log("E-mail envoyé avec succès:", info.response);
         }
@@ -154,7 +153,6 @@ const PostRegister = async (req, res, next) => {
 
     const io = req.app.get("socketio");
     io.emit("newUserRegistration", { user: newUser });
-
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
       const validationErrors = error.errors.map((err) => ({
