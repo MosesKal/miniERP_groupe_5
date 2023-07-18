@@ -172,6 +172,7 @@ const getCotationDetails = async (req, res) => {
 };
 
 const getAllCotations = async (req, res) => {
+
   try {
     const cotations = await db.Cotations.findAll({
       include: [
@@ -270,7 +271,6 @@ const addStock = async (req, res) => {
       });
   }
 };
-
 const getAllStocksByUser = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -295,20 +295,20 @@ const getAllStocksByUser = async (req, res) => {
   }
 };
 
-// // Mettre a jour le stock d'un produit pour un utilisateur donne
-//
-// const updateStock = async (req, res) =>{
-//   try{
-//     const {stockId} = req.params;
-//     const {stock} = req.body;
-//     const updateStock = await Stock.update({stock}, {where: {id:stockId}});
-//     res.json(updateStock);
-//   }catch (error){
-//     console.error(error);
-//     res.status(500).json({message : "Une erreur est survenue lors de la mise a jour du stock"});
-//   }
-// }
-//
+// Mettre a jour le stock d'un produit pour un utilisateur donne
+
+const updateStock = async (req, res) =>{
+  try{
+    const {stockId} = req.params;
+    const {stock} = req.body;
+    const updateStock = await db.Stock.update({stock}, {where: {id:stockId}});
+    res.json(updateStock);
+  }catch (error){
+    console.error(error);
+    res.status(500).json({message : "Une erreur est survenue lors de la mise a jour du stock"});
+  }
+}
+
 // //Supprimer un stock pour un utilisateur donne
 // const deleteStock = async (req, res)=>{
 //   try{
