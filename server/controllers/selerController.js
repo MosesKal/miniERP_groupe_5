@@ -162,17 +162,13 @@ const getCotationDetails = async (req, res) => {
     res.status(200).json(cotationDetails);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        error:
-          "Erreur lors de la récupération des informations de la cotation.",
-      });
+    res.status(500).json({
+      error: "Erreur lors de la récupération des informations de la cotation.",
+    });
   }
 };
 
 const getAllCotations = async (req, res) => {
-
   try {
     const cotations = await db.Cotations.findAll({
       include: [
@@ -264,11 +260,9 @@ const addStock = async (req, res) => {
     res.status(201).json(newStock);
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({
-        message: "Une erreur est survenue lors de la création du stock",
-      });
+    res.status(500).json({
+      message: "Une erreur est survenue lors de la création du stock",
+    });
   }
 };
 const getAllStocksByUser = async (req, res) => {
@@ -287,27 +281,32 @@ const getAllStocksByUser = async (req, res) => {
     res.json(stocks);
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({
-        message: "Une erreur est servenue lors de la recuperation des stocks.",
-      });
+    res.status(500).json({
+      message: "Une erreur est servenue lors de la recuperation des stocks.",
+    });
   }
 };
 
 // Mettre a jour le stock d'un produit pour un utilisateur donne
 
-const updateStock = async (req, res) =>{
-  try{
-    const {stockId} = req.params;
-    const {stock} = req.body;
-    const updateStock = await db.Stock.update({stock}, {where: {id:stockId}});
+const updateStock = async (req, res) => {
+  try {
+    const { stockId } = req.params;
+    const { stock } = req.body;
+    const updateStock = await db.Stock.update(
+      { stock },
+      { where: { id: stockId } }
+    );
     res.json(updateStock);
-  }catch (error){
+  } catch (error) {
     console.error(error);
-    res.status(500).json({message : "Une erreur est survenue lors de la mise a jour du stock"});
+    res
+      .status(500)
+      .json({
+        message: "Une erreur est survenue lors de la mise a jour du stock",
+      });
   }
-}
+};
 
 // //Supprimer un stock pour un utilisateur donne
 // const deleteStock = async (req, res)=>{
