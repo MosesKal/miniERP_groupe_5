@@ -241,6 +241,7 @@ const getAllCotations = async (req, res) => {
 };
 
 //Ajouter un stock pour un utilisateur donne
+
 const addStock = async (req, res) => {
   try {
     const { userId, produitId, stock } = req.body;
@@ -265,6 +266,7 @@ const addStock = async (req, res) => {
     });
   }
 };
+
 const getAllStocksByUser = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -288,89 +290,190 @@ const getAllStocksByUser = async (req, res) => {
 };
 
 // Mettre a jour le stock d'un produit pour un utilisateur donne
-
 const updateStock = async (req, res) => {
   try {
     const { stockId } = req.params;
     const { stock } = req.body;
-    const updateStock = await db.Stock.update(
-      { stock },
-      { where: { id: stockId } }
-    );
-    res.json(updateStock);
+
+    // Validation des données
+    if (typeof stock !== "number" || stock < 0) {
+      return res
+        .status(400)
+        .json({ message: "Le stock doit être un nombre entier positif" });
+    }
+
+    // Recherche du stock existant
+    const existingStock = await db.Stock.findByPk(stockId);
+    if (!existingStock) {
+      return res
+        .status(404)
+        .json({ message: "Le stock avec cet ID n'existe pas" });
+    }
+
+    // Mise à jour du stock dans une transaction
+    const updatedStock = await db.sequelize.transaction(async (transaction) => {
+      existingStock.stock = stock;
+      return existingStock.save({ transaction });
+    });
+
+    // Envoi de la réponse
+    res.json(updatedStock);
   } catch (error) {
     console.error(error);
     res
       .status(500)
       .json({
-        message: "Une erreur est survenue lors de la mise a jour du stock",
+        message: "Une erreur est survenue lors de la mise à jour du stock",
       });
   }
 };
+// Supprimer un stock pour un utilisateur donne
+const deleteStock = async (req, res) => {
+  try {
+    const { stockId } = req.params;
 
-// //Supprimer un stock pour un utilisateur donne
-// const deleteStock = async (req, res)=>{
-//   try{
-//     const {stockId} = req.params;
-//     await Stock.destroy({where : {id: stockId}});
-//     res.json({message : "Le stock a été supprimé avec succès."});
-//   }catch (error){
-//     console.error(error);
-//     res.status(500).json({message : "Une erreur est survenue lors de la suppression du stock." });
-//   }
-// }
+    const existingStock = await db.Stock.findOne({ where: { id: stockId } });
+    if (!existingStock) {
+      return res.status(404).json({ message: "Le stock n'a pas été trouvé." });
+    }
+
+    // Effectuer des actions supplémentaires avant la suppression du stock
+    // Par exemple, vous pouvez vérifier si le stock est utilisé ailleurs avant de le supprimer
+
+    // Supprimer le stock
+    await db.Stock.destroy({ where: { id: stockId } });
+
+    res.json({ message: "Le stock a été supprimé avec succès." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Une erreur est survenue lors de la suppression du stock." });
+  }
+};
+
+const getStockAndProductByUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Vérifier si l'utilisateur existe
+    const user = await db.User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Récupérer le stock associé à l'utilisateur
+    const stock = await db.Stock.findOne({ where: { userId } });
+    if (!stock) {
+      return res.status(404).json({ message: 'Stock not found' });
+    }
+
+    // Récupérer les détails du produit associé au stock
+    const product = await db.Product.findByPk(stock.productId);
+
+    // Renvoyer la réponse avec les informations du stock et du produit
+    res.status(200).json({ stock, product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+const updateStockByUser = async (req, res) =>{
+  try {
+    const userId = req.params.userId;
+    const { quantity } = req.body;
+
+    const stock = await db.Stock.findOne({ where: { userId } });
+
+    if (!stock) {
+      return res.status(404).json({ message: 'Stock not found' });
+    }
+
+    stock.stock = quantity;
+    await stock.save();
+
+    res.status(200).json({ message: 'Stock updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Ajouter un produit pour un utilisateur
+
+const addProductByUser = async (req, res)=>{
+  try{
+    const userId= req.params.userId;
+    const {name, date, status} = req.body;
+    const newProduct = await db.ProduitId.create({
+      nom : name,
+      date,
+      statut: status,
+      userId,
+    });
+
+    res.status(201).json({product: newProduct});
+  } catch(error){
+    console.error(error);
+    res.status(500).json({message : "Internal server error"});
+  }
+};
+
+const getProduitsCategories = async (req, res) => {
+  try {
+    const produits = await db.Produits.findAll({
+      include: {
+        model: db.categorie_produits,
+        attributes: ['nom_categorie', 'illustration_categorie'],
+      },
+    });
+
+    res.status(200).json(produits);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Une erreur est survenue lors de la récupération des produits." });
+  }
+};
+
+const getAllCategories = async (req, res) => {
+  try {
+    const categories = await db.categorie_produits.findAll();
+
+    res.status(200).json(categories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Une erreur est survenue lors de la récupération des catégories." });
+  }
+};
+
+
+
+
+
 //
-// const getStockByUser = async (req, res)=>{
+// Obtenir tous les produits d'un utilisateur
+//
+// const getAllProductsByUser = async (req, res) => {
 //   try {
 //     const userId = req.params.userId;
-//     const stock = await db.Stock.findOne({ where: { userId } });
-//     if (!stock) {
-//       return res.status(404).json({ message: 'Stock not found' });
-//     }
-//     res.status(200).json({ stock });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
 //
-// const updateStockByUser = async (req, res) =>{
-//   try {
-//     const userId = req.params.userId;
-//     const { quantity } = req.body;
-//
-//     const stock = await db.Stock.findOne({ where: { userId } });
-//
-//     if (!stock) {
-//       return res.status(404).json({ message: 'Stock not found' });
+//     const user = await db.User.findByPk(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
 //     }
 //
-//     stock.stock = quantity;
-//     await stock.save();
-//
-//     res.status(200).json({ message: 'Stock updated successfully' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-//
-// // Obtenir tous les produits d'un utilisateur
-//
-// const getAllProductsByUser = async (req, res) =>{
-//   try{
-//     const userId = req.params.userId;
-//     const produits = await Produits.findAll({
-//       where : {userId},
-//       include : [User],
+//     const products = await db.Produits.findAll({
+//       where: { userId },
+//       include: [{ model: db.User, as: 'user' }],
 //     });
-//     res.json(produits);
-//   }catch (error){
+//
+//     res.status(200).json({ products });
+//   } catch (error) {
 //     console.error(error);
-//     res.status(500).json({message : "Une erreur est survenue lors de la recuperation des produits."});
+//     res.status(500).json({ message: 'Internal server error' });
 //   }
 // };
-//
+
+
 // const getProductsByUser = async (req, res)=>{
 //   try {
 //     const userId = req.params.userId;
@@ -382,25 +485,7 @@ const updateStock = async (req, res) => {
 //     res.status(500).json({ message: 'Internal server error' });
 //   }
 // };
-//
-// //Ajouter un produit pour un utilisateur
-// const addProductByUser = async (req, res)=>{
-//   try{
-//     const userId= req.params.userId;
-//     const {name, date, status} = req.body;
-//     const newProduct = await db.ProduitId.create({
-//       nom : name,
-//       date,
-//       statut: status,
-//       userId,
-//     });
-//
-//     res.status(201).json({product: newProduct});
-//   } catch(error){
-//     console.error(error);
-//     res.status(500).json({message : "Internal server error"});
-//   }
-// };
+
 //
 // //Mettre à jour un produit d'un utilisateur
 //
@@ -574,4 +659,10 @@ module.exports = {
   getAllCotations,
   addStock,
   getAllStocksByUser,
+  updateStock,
+  deleteStock,
+  getStockAndProductByUser,
+  updateStockByUser,
+  getProduitsCategories,
+  getAllCategories
 };
