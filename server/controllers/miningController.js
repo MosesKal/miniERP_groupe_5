@@ -3,8 +3,6 @@ const db = require("../models/"); // Assurez-vous d'importer correctement vos mo
 const createCotation = async (req, res) => {
   const { startDate, endDate, description, duree, userid, produits } = req.body;
 
-  console.log(produits.detail);
-
   try {
     const user = await db.User.findOne({
       where: {
@@ -95,13 +93,13 @@ const getDataMining = async (req, res) => {
 };
 
 const getProduits = async (req, res)=>{
- try{
-   const produits = await db.Produits.findAll();
-   res.status(200).json(produits);
- }catch (e) {
-   console.log(e);
-   res.status(500).json({message : "Une erreur est survenue lors de la récupération des produits."})
- }
+  try{
+    const produits = await db.Produits.findAll();
+    res.status(200).json(produits);
+  }catch (e) {
+    console.log(e);
+    res.status(500).json({message : "Une erreur est survenue lors de la récupération des produits."})
+  }
 }
 
 module.exports = { createCotation, getDataMining, getProduits};
